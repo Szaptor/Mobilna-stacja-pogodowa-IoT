@@ -9,10 +9,14 @@
 //MQUnifiedsensor 3.0.0
 //OneWire Library2.3.8
 //PubSubClient 2.8
+//WiFiManager 2.0.17
+
 
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
+#include <WiFiManager.h>
+
 
 // --- DS18B20 sensor tempDS ---
 #include <OneWire.h> // For communication with sensor via digital on 1 wire of sensor
@@ -53,114 +57,195 @@ Adafruit_SSD1306 OLED(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define SCL_PIN 7
 
 
-// ==== WIFI CONFIG ====
-const char* ssid = "Note 12 Pro";
-const char* password = "123456789";
+// // ==== WIFI CONFIG ====
+// const char* ssid = "Note 12 Pro";
+// const char* password = "123456789";
 
-// ==== MQTT CONFIG ====
-const char* mqtt_server = "iot.marekurbaniak.pl";  // or IP address
-const int mqtt_port = 1883;                         // TCP port (not TLS)
-const char* mqtt_user = "WeatherStation";       // optional
-const char* mqtt_pass = "iot2025projekt";       // optional
-const char* mqtt_topic = "v1/devices/me/telemetry";        // your topic name
+// // ==== MQTT CONFIG ====
+// const char* mqtt_server = "iot.marekurbaniak.pl";  // or IP address
+// const int mqtt_port = 1883;                         // TCP port (not TLS)
+// const char* mqtt_user = "WeatherStation";       // optional
+// const char* mqtt_pass = "iot2025projekt";       // optional
+// const char* mqtt_topic = "v1/devices/me/telemetry";        // your topic name
 
 // ==== DATA ====
-float tempDS = 23.55;
-float humDHT = 55.25;
-float coPpm = 1.45;
+float tempDS = 0;
+float humDHT = 0;
+float coPpm = 0;
 
 // ==== CLIENTS ====
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-void setup_wifi() {
-  delay(10);
-  if(!OLED.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Test communication with OLED via I2C
-    Serial.println("SSD1306 allocation failed"); 
-      for(;;){;}
-  }
-  //--- Start and cofigure display ---
-  OLED.display();
-  delay(1000);
-  OLED.clearDisplay();
-  OLED.setTextSize(1);
-  OLED.setTextColor(WHITE);
+
+// ==== MQTT CONFIG (set via WiFiManager) ====
+const char* mqtt_topic = "v1/devices/me/telemetry"; // stays constant
+String mqtt_server = "iot.marekurbaniak.pl";
+int mqtt_port = 1883;
+String mqtt_user = "WeatherStation";
+String mqtt_pass = "iot2025projekt";
+char mqtt_server_buf[40];
+char mqtt_port_buf[6];
+char mqtt_user_buf[40];
+char mqtt_pass_buf[40];
+
+
+bool configureWiFiAndMQTT() {
+	OLED.clearDisplay();
   OLED.setCursor(0, 10);
-  OLED.println("Start...");
+  OLED.println("Opening wifi setup...");
   OLED.display();
-  Serial.println("Start...");
+  strncpy(mqtt_server_buf, mqtt_server.c_str(), sizeof(mqtt_server_buf));
+  strncpy(mqtt_port_buf,  String(mqtt_port).c_str(), sizeof(mqtt_port_buf));
+  strncpy(mqtt_user_buf,  mqtt_user.c_str(), sizeof(mqtt_user_buf));
+  strncpy(mqtt_pass_buf,  mqtt_pass.c_str(), sizeof(mqtt_pass_buf));
+  WiFiManager wm;
 
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  OLED.clearDisplay();
-  OLED.setCursor(0, 10);
-  OLED.println("Connecting to ");
-  OLED.setCursor(0, 20);
-  OLED.println(ssid);
-  OLED.display();
-  WiFi.begin(ssid, password);
+  // Custom parameters
+  WiFiManagerParameter p_server("server", "MQTT Server", mqtt_server_buf, 40);
+  WiFiManagerParameter p_port("port", "MQTT Port", mqtt_port_buf, 6);
+  WiFiManagerParameter p_user("user", "MQTT User", mqtt_user_buf, 40);
+  WiFiManagerParameter p_pass("pass", "MQTT Password", mqtt_pass_buf, 40);
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  wm.addParameter(&p_server);
+  wm.addParameter(&p_port);
+  wm.addParameter(&p_user);
+  wm.addParameter(&p_pass);
+
+  wm.setTimeout(180);
+
+  // Try to connect, or open AP
+  if (!wm.autoConnect("WeatherStationAP", "12345678")) {
+    Serial.println("WiFiManager Timeout → Restarting");
+    OLED.clearDisplay();
+    OLED.setCursor(0, 10);
+    OLED.println("WiFiManager Timeout → Restarting");
+    OLED.display();
+    delay(3000);
+    ESP.restart();
+    return false; // unreachable, but consistent
   }
 
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.print("IP: ");
+  Serial.println("WiFi connected!");
   Serial.println(WiFi.localIP());
 
   OLED.clearDisplay();
   OLED.setCursor(0, 10);
-  OLED.println("WiFi connected");
+  OLED.println("WiFi connected!");
   OLED.setCursor(0, 20);
-  OLED.println("IP: ");
-  OLED.print(WiFi.localIP());
+  OLED.println(WiFi.localIP());
+  OLED.display();
+  // Save MQTT params
+    mqtt_server = p_server.getValue();
+    mqtt_port   = atoi(p_port.getValue());
+    mqtt_user   = p_user.getValue();
+    mqtt_pass   = p_pass.getValue();
+  // Apply server settings
+  client.setServer(mqtt_server.c_str(), mqtt_port);
+
+  // -------------------------
+  // NEW: Check MQTT NOW
+  // -------------------------
+  OLED.clearDisplay();
+  OLED.setCursor(0, 10);
+  OLED.println("Checking MQTT...");
   OLED.display();
 
-   dht.begin(); // Start communication with DHT22
-
-   // --- Gas sensor config ---
-  MQ7.setRegressionMethod(1); // 1 = Exponential (dla MQ-3)
-  MQ7.setA(99.042);           // współczynnik z krzywej z dokumentacji
-  MQ7.setB(-1.518);           // współczynnik z krzywej z dokumentacji
-  MQ7.init();
-
-  float calcR0 = 0;
-  for (int i = 0; i < 10; i++) {
-    MQ7.update();
-    calcR0 += MQ7.calibrate(RatioMQ7CleanAir);
-    delay(500);
-    
-  }
-  MQ7.setR0(calcR0 / 10);
-
-  DS18B20.begin(); // Start communication with DS18B20
-
-
+  String cid = "SIMA7670E";
   
+  if (!client.connect(cid.c_str(), mqtt_user.c_str(), mqtt_pass.c_str())) {
+    Serial.println("MQTT check failed → reopening WiFiManager");
+    OLED.clearDisplay();
+    OLED.setCursor(0, 10);
+    OLED.println("MQTT FAILED!");
+    OLED.setCursor(0, 20);
+    OLED.println("Reopen config...");
+    OLED.display();
+    delay(2000);
+    
+    // Open AP immediately (NO wifi erase)
+    wm.startConfigPortal("WeatherStationAP", "12345678");
+   
+  }
   delay(1000);
+  // Save MQTT params
+        mqtt_server = p_server.getValue();
+        mqtt_port   = atoi(p_port.getValue());
+        mqtt_user   = p_user.getValue();
+        mqtt_pass   = p_pass.getValue();
+     
+    Serial.println("MQTT Server: " + mqtt_server);
+    Serial.println("MQTT Port: " + String(mqtt_port));
+    Serial.println("MQTT User: " + mqtt_user);
+  OLED.clearDisplay();
+  OLED.setCursor(0, 30);
+  OLED.println("MQTT Server: " + mqtt_server);
+  OLED.setCursor(0, 40);
+  OLED.println("MQTT Port: " + String(mqtt_port));
+  OLED.setCursor(0, 40);
+  OLED.println("MQTT User: " + mqtt_user);
+  OLED.display();
+  delay(1000);
+  client.disconnect();
+  delay(1000);
+  client.setServer(mqtt_server.c_str(), mqtt_port);
+  Serial.println("MQTT OK after WiFi setup!");
+  OLED.clearDisplay();
+  OLED.setCursor(0, 10);
+  OLED.println("MQTT OK!");
+  OLED.display();
+  delay(800);
+  return true;
 }
 
-void reconnect() {
-  // Loop until connected
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Create client ID
-    String clientId = "SIMA7670E";
+int mqttFailCount = 0;
+const int mqttFailLimit = 5;   // After 5 failures → reopen WiFiManager
 
-    if (client.connect(clientId.c_str(), mqtt_user, mqtt_pass)) {
-      Serial.println("connected");
-      // Subscribe if needed:
-      // client.subscribe("some/topic");
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      delay(5000);
-    }
+bool reconnectMQTT() {
+  if (client.connected()) {
+    mqttFailCount = 0;   // reset counter
+    return true;
   }
+
+  Serial.println("Attempting MQTT connection...");
+  OLED.clearDisplay();
+  OLED.setCursor(0, 10);
+  OLED.println("Attempting MQTT connection...");
+  OLED.display();
+  String clientId = "SIMA7670E";
+  if (client.connect(clientId.c_str(), mqtt_user.c_str(), mqtt_pass.c_str())) {
+    Serial.println("MQTT connected");
+    OLED.clearDisplay();
+    OLED.setCursor(0, 10);
+    OLED.println("MQTT connected");
+    OLED.display();
+    mqttFailCount = 0;   // success → reset
+    return true;
+  }
+
+  // FAILED
+  mqttFailCount++;
+  Serial.print("MQTT failed (");
+  Serial.print(mqttFailCount);
+  Serial.println(")");
+  OLED.clearDisplay();
+  OLED.setCursor(0, 10);
+  OLED.println("MQTT failed ("+(String)mqttFailCount+")");
+  OLED.display();
+
+  if (mqttFailCount >= mqttFailLimit) {
+    Serial.println("Too many MQTT failures → reopening WiFiManager");
+    OLED.clearDisplay();
+    OLED.setCursor(0, 10);
+    OLED.println("Too many MQTT failures → reopening WiFiManager");
+    OLED.display();
+    // Run full WiFiManager + re-download MQTT params
+    configureWiFiAndMQTT();
+
+    mqttFailCount = 0;
+  }
+
+  return false;
 }
 
 String publishState="";
@@ -232,22 +317,53 @@ void publishData() {
     publishState ="Last send failed";
   }
 }
-
+bool configRunning = false;
 void setup() {
   Wire.begin(SDA_PIN, SCL_PIN);
   Serial.begin(115200);
-  setup_wifi();
+  
+   if(!OLED.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("SSD1306 allocation failed"); 
+    for(;;);
+  }
 
-  client.setServer(mqtt_server, mqtt_port);
+  OLED.clearDisplay();
+  OLED.setTextSize(1);
+  OLED.setTextColor(WHITE);
+  OLED.setCursor(0, 10);
+  OLED.println("Starting setup...");
+  OLED.display();
+  delay(500);
+  
+  
+// RUN ONLY THE EXTRACTED WIFIMANAGER LOGIC
+
+  configureWiFiAndMQTT();
+ 
+
+  dht.begin();
+  MQ7.setRegressionMethod(1);
+  MQ7.setA(99.042);
+  MQ7.setB(-1.518);
+  MQ7.init();
+
+  float calcR0 = 0;
+  for (int i = 0; i < 10; i++) {
+    MQ7.update();
+    calcR0 += MQ7.calibrate(RatioMQ7CleanAir);
+    delay(500);
+  }
+  MQ7.setR0(calcR0 / 10);
+  DS18B20.begin();
+
 }
 
 unsigned long lastPublishTime = 0;
 const unsigned long publishInterval = 60000; // 60 seconds
 
 void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
+  reconnectMQTT();   // will auto-reopen WiFiManager when needed
+  
   client.loop();
 
   unsigned long currentMillis = millis();
