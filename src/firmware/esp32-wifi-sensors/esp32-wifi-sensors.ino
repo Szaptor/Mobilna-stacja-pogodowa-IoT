@@ -80,14 +80,12 @@ PubSubClient client(espClient);
 
 // ==== MQTT CONFIG (set via WiFiManager) ====
 const char* mqtt_topic = "v1/devices/me/telemetry"; // stays constant
-String mqtt_server = "iot.marekurbaniak.pl";
-int mqtt_port = 1883;
-String mqtt_user = "WeatherStation";
-String mqtt_pass = "iot2025projekt";
-char mqtt_server_buf[40];
-char mqtt_port_buf[6];
-char mqtt_user_buf[40];
-char mqtt_pass_buf[40];
+
+// Default values (editable via WiFiManager)
+char mqtt_server[100] = "iot.marekurbaniak.pl";
+char mqtt_port[10]   = "1883";
+char mqtt_user[100]  = "WeatherStation";
+char mqtt_pass[100]  = "iot2025projekt";
 
 
 bool configureWiFiAndMQTT() {
@@ -95,17 +93,12 @@ bool configureWiFiAndMQTT() {
   OLED.setCursor(0, 10);
   OLED.println("Opening wifi setup...");
   OLED.display();
-  strncpy(mqtt_server_buf, mqtt_server.c_str(), sizeof(mqtt_server_buf));
-  strncpy(mqtt_port_buf,  String(mqtt_port).c_str(), sizeof(mqtt_port_buf));
-  strncpy(mqtt_user_buf,  mqtt_user.c_str(), sizeof(mqtt_user_buf));
-  strncpy(mqtt_pass_buf,  mqtt_pass.c_str(), sizeof(mqtt_pass_buf));
   WiFiManager wm;
-
-  // Custom parameters
-  WiFiManagerParameter p_server("server", "MQTT Server", mqtt_server_buf, 40);
-  WiFiManagerParameter p_port("port", "MQTT Port", mqtt_port_buf, 6);
-  WiFiManagerParameter p_user("user", "MQTT User", mqtt_user_buf, 40);
-  WiFiManagerParameter p_pass("pass", "MQTT Password", mqtt_pass_buf, 40);
+  // Create WiFiManager parameters (already using char arrays)
+  WiFiManagerParameter p_server("server", "MQTT Server", mqtt_server, 100);
+  WiFiManagerParameter p_port  ("port", "MQTT Port",   mqtt_port,  10);
+  WiFiManagerParameter p_user  ("user", "MQTT User",   mqtt_user, 100);
+  WiFiManagerParameter p_pass  ("pass", "MQTT Pass",   mqtt_pass, 100);
 
   wm.addParameter(&p_server);
   wm.addParameter(&p_port);
@@ -136,12 +129,13 @@ bool configureWiFiAndMQTT() {
   OLED.println(WiFi.localIP());
   OLED.display();
   // Save MQTT params
-    mqtt_server = p_server.getValue();
-    mqtt_port   = atoi(p_port.getValue());
-    mqtt_user   = p_user.getValue();
-    mqtt_pass   = p_pass.getValue();
+  // Copy updated values back to variables (optional, but recommended)
+  strcpy(mqtt_server, p_server.getValue());
+  strcpy(mqtt_port,   p_port.getValue());
+  strcpy(mqtt_user,   p_user.getValue());
+  strcpy(mqtt_pass,   p_pass.getValue());
   // Apply server settings
-  client.setServer(mqtt_server.c_str(), mqtt_port);
+  client.setServer(mqtt_server, atoi(mqtt_port));
 
   // -------------------------
   // NEW: Check MQTT NOW
@@ -153,7 +147,7 @@ bool configureWiFiAndMQTT() {
 
   String cid = "SIMA7670E";
   
-  if (!client.connect(cid.c_str(), mqtt_user.c_str(), mqtt_pass.c_str())) {
+  if (!client.connect(cid.c_str(), mqtt_user, mqtt_pass)) {
     Serial.println("MQTT check failed → reopening WiFiManager");
     OLED.clearDisplay();
     OLED.setCursor(0, 10);
@@ -169,26 +163,27 @@ bool configureWiFiAndMQTT() {
   }
   delay(1000);
   // Save MQTT params
-        mqtt_server = p_server.getValue();
-        mqtt_port   = atoi(p_port.getValue());
-        mqtt_user   = p_user.getValue();
-        mqtt_pass   = p_pass.getValue();
+  // Copy updated values back to variables (optional, but recommended)
+  strcpy(mqtt_server, p_server.getValue());
+  strcpy(mqtt_port,   p_port.getValue());
+  strcpy(mqtt_user,   p_user.getValue());
+  strcpy(mqtt_pass,   p_pass.getValue());
      
-    Serial.println("MQTT Server: " + mqtt_server);
+    Serial.println("MQTT Server: " + (String)mqtt_server);
     Serial.println("MQTT Port: " + String(mqtt_port));
-    Serial.println("MQTT User: " + mqtt_user);
+    Serial.println("MQTT User: " + (String)mqtt_user);
   OLED.clearDisplay();
   OLED.setCursor(0, 30);
-  OLED.println("MQTT Server: " + mqtt_server);
+  OLED.println("MQTT Server: " + (String)mqtt_server);
   OLED.setCursor(0, 40);
   OLED.println("MQTT Port: " + String(mqtt_port));
   OLED.setCursor(0, 40);
-  OLED.println("MQTT User: " + mqtt_user);
+  OLED.println("MQTT User: " + (String)mqtt_user);
   OLED.display();
   delay(1000);
   client.disconnect();
   delay(1000);
-  client.setServer(mqtt_server.c_str(), mqtt_port);
+  client.setServer(mqtt_server, atoi(mqtt_port));
   Serial.println("MQTT OK after WiFi setup!");
   OLED.clearDisplay();
   OLED.setCursor(0, 10);
@@ -213,7 +208,7 @@ bool reconnectMQTT() {
   OLED.println("Attempting MQTT connection...");
   OLED.display();
   String clientId = "SIMA7670E";
-  if (client.connect(clientId.c_str(), mqtt_user.c_str(), mqtt_pass.c_str())) {
+  if (client.connect(clientId.c_str(), mqtt_user, mqtt_pass)) {
     Serial.println("MQTT connected");
     OLED.clearDisplay();
     OLED.setCursor(0, 10);
