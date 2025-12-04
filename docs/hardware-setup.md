@@ -1,5 +1,5 @@
 # ELEMENTY SKŁADOWE PROJEKTU
-## ESP32-3S-WROOM1
+## ESP32-S3-WROOM-1-N8R8 WiFi/Bluetooth 16MB
 ![ESP32-WROOM](../media/ESP32-3s-wroom1.jpg)
 ## Wyświetlacz OLED niebieski graficzny 0,96'' 128x64px I2C
 ![OLED](../media/OLED.jpg)
