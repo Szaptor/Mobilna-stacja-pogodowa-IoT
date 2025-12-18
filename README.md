@@ -6,7 +6,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 1. [Potrzebne materiały](#potrzebne-materiały)
 2. [Schemat połączeń](#schemat-połączeń)
 3. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
-4. [Instalacja dodatku do obsługi ESP32](#Instalacja-dodatku-do-obsługi-ESP32)
+4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
 
 
 ---
@@ -31,21 +31,23 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 ![SCHEMAT POŁĄCZEŃ](/media/schemat_polaczen.jpg)
 ---
 
+<a name="Instalacja środowiska Arduino IDE]"></a>
 ## Instalacja środowiska Arduino IDE
-1. [Pobieramy Arduino IDE z tej lokalizacji](https://www.arduino.cc/en/software/)
+[Pobieramy Arduino IDE z tej lokalizacji](https://www.arduino.cc/en/software/)
    
 ![Zrzut ekranu prezentujący stronę](/media/instalacjaIDE.png)
-2. W trakcie instalacji zalecamy pozostawienie opcji domyślnych.
+W trakcie instalacji zalecamy pozostawienie opcji domyślnych.
 
-3. Podczas pierwszego uruchomienia programu należy zezwolić na zainstalowanie oprogramowania oraz poczekać na instalacje wszystkich sterowników USB i dodatków wymaganych przez IDE.
+Podczas pierwszego uruchomienia programu należy zezwolić na zainstalowanie oprogramowania oraz poczekać na instalacje wszystkich sterowników USB i dodatków wymaganych przez IDE.
    
 ![Zapytanie o zezwolenie](/media/zezwol.png)
-4. Zalecamy również zmianę języka na polski. Można tego dokonać poprzez kliknięcie zakładki „File”, a następnie wybrać „Preferenes”, a w nich „Settings” - poniższy zrzut ekranu prezentuje wspominane miejsce.
+Zalecamy również zmianę języka na polski. Można tego dokonać poprzez kliknięcie zakładki „File”, a następnie wybrać „Preferenes”, a w nich „Settings” - poniższy zrzut ekranu prezentuje wspominane miejsce.
 
 ![Okienko z ustawieniami umożliwiającymi zmianę języka](/media/zmiana_jezyka.png)
 ---
 
+<a name="Instalacja dodatku do obsługi ESP32]"></a>
 ## Instalacja dodatku do obsługi ESP32
 
-W celu instalacji menadźera płytek do obsługi wybranego przez nas mikrokontrolera ESP32, należy z bocznego paska wybrać drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę „esp32”. Należy skupić się na drugiej pozycji która została udostępniona przez firmę Espressif Systems. Z rozwijlanego menu należy wybrać conajmniej wersję 3.3.3. W tym momencie można kliknąć przycisk „ZAINSTALUJ”. Sytuację tę prezentuje poniższy zrzut ekranu.
+W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontrolera ESP32, należy z bocznego paska wybrać drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę „esp32”. Należy skupić się na drugiej pozycji która została udostępniona przez firmę Espressif Systems. Z rozwijlanego menu należy wybrać conajmniej wersję 3.3.3. W tym momencie można kliknąć przycisk „ZAINSTALUJ”. Sytuację tę prezentuje poniższy zrzut ekranu. Sama instalacja może potrwać kilka minut.
 ![Zrzut ekranu prezentujący wybór dodatku obsługująćego ESP32](/media/wybor_esp32.png)
