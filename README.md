@@ -7,6 +7,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 2. [Schemat połączeń](#schemat-połączeń)
 3. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
 4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
+5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bilbliotek)
 
 
 ---
@@ -51,3 +52,26 @@ Zalecamy również zmianę języka na polski. Można tego dokonać poprzez klikn
 
 W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontrolera ESP32, należy z bocznego paska wybrać drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę „esp32”. Należy skupić się na drugiej pozycji która została udostępniona przez firmę Espressif Systems. Z rozwijlanego menu należy wybrać conajmniej wersję 3.3.3. W tym momencie można kliknąć przycisk „ZAINSTALUJ”. Sytuację tę prezentuje poniższy zrzut ekranu. Sama instalacja może potrwać kilka minut.
 ![Zrzut ekranu prezentujący wybór dodatku obsługująćego ESP32](/media/wybor_esp32.png)
+---
+
+<a name="Instalacja wymaganych bibliotek]"></a>
+## Instalacja wymaganych bibliotek
+Do poprawnego działania naszej stacji pogodowej wymagane jest również zainstalowanie kilku dodatkowych bibliotek. Schemat ich pobierania jest identyczny co do kroku wcześniejszego. Należy więc wybrać z bocznego paska drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę zadanej biblioteki.
+### dht sensor library
+Jak nazwa wsazuje jest do biblioteka czujnika DHT. Program poinformuje nas, że wybrana biblioteka wymaga do ziałania biblioteki „Adafruit Unified Sensor”. Klikamy przycisk „Zainstaluj wszystko”. Prezentuje to poniższy zrzut ekranu.
+![Zrzut ekranu prezetnujący instalację biblioteki do DHT](/media/biblioteka_DHT.png)
+
+### mqunifiedsensor
+![Zrzut ekranu prezetnujący instalację biblioteki do MQ7](/media/biblioteka_mq.png)
+### dallastemperature
+![Zrzut ekranu prezetnujący instalację biblioteki Dallas](/media/biblioteka_dallas.png)
+### onewire
+![Zrzut ekranu prezetnujący instalację biblioteki Onewire](/media/biblioteka_onewire.png)
+### adafruit ssd1306
+![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_adafruit.png)
+### wifimanager
+![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_wifi.png)
+### pubsubclient
+![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_pubsubclient.png)
+### arduinojson
+![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_arduinojson.png)
