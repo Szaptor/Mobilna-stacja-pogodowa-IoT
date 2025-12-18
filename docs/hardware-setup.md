@@ -9,5 +9,5 @@
 ![Czujnik temperatury DS18B20](../media/czujnik_temperatury.jpg)
 ## Moduł DHT22 Czujnik Temperatury i Wilgotności Black
 ![Czujnik wilgotnośc DHT22](../media/czujnik_wilgotnosci.jpg)
-# SCHEMAT POŁĄCZEŃ (ROBOCZY)
+# SCHEMAT POŁĄCZEŃ
 ![ROBOCZY SCHEMAT POŁĄCZEŃ](../media/schemat_polaczen.jpg)
