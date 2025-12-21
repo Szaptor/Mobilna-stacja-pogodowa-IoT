@@ -85,7 +85,7 @@ Biblioteka ta jest potrzebna do łatwiejszego formatowania danych przesyłanych 
 ![Zrzut ekranu prezentujący instalację biblioteki arduinojson](/media/biblioteka_arduinojson.png)
 ---
 
-<a name="konfiguracja"></a>
+<a name="Dalsza konfiguracja"></a>
 ## Dalsza konfiguracja
 Użyta przez nas płytka posiada wbudowany konwerter portu szeregowego, dlatego możena podłączyć ją do komputera poprzez port USB i poczekać na instalację sterowników.
 Przed wgraniem szkicu do podłączonego mikrokontrolera należy ustawić w Arduino IDE kilka ważnych ustawień.
