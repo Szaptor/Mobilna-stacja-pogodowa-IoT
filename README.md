@@ -8,7 +8,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 3. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
 4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
 5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bilbliotek)
-6. [Dalsza konfiguracja](#konfiguracja)
+6. [Dalsza konfiguracja](#dalsza-konfiguracja)
 
 
 ---
