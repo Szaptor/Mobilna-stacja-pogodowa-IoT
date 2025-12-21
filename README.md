@@ -28,7 +28,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 ![Czujnik wilgotnośc DHT22](/media/czujnik_wilgotnosci.jpg)
 
 ---
-<a name="Schemat połączeń]"></a>
+<a name="Schemat połączeń"></a>
 ## Schemat połączeń
 ![SCHEMAT POŁĄCZEŃ](/media/schemat_polaczen.jpg)
 ---
@@ -48,14 +48,14 @@ Zalecamy również zmianę języka na polski. Można tego dokonać poprzez klikn
 ![Okienko z ustawieniami umożliwiającymi zmianę języka](/media/zmiana_jezyka.png)
 ---
 
-<a name="Instalacja dodatku do obsługi ESP32]"></a>
+<a name="Instalacja dodatku do obsługi ESP32"></a>
 ## Instalacja dodatku do obsługi ESP32
 
 W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontrolera ESP32, należy z bocznego paska wybrać drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę „esp32”. Należy skupić się na drugiej pozycji która została udostępniona przez firmę Espressif Systems. Z rozwijlanego menu należy wybrać conajmniej wersję 3.3.3. W tym momencie można kliknąć przycisk „ZAINSTALUJ”. Sytuację tę prezentuje poniższy zrzut ekranu. Sama instalacja może potrwać kilka minut.
 ![Zrzut ekranu prezentujący wybór dodatku obsługująćego ESP32](/media/wybor_esp32.png)
 ---
 
-<a name="Instalacja wymaganych bibliotek]"></a>
+<a name="Instalacja wymaganych bibliotek"></a>
 ## Instalacja wymaganych bibliotek
 Do poprawnego działania naszej stacji pogodowej wymagane jest również zainstalowanie kilku dodatkowych bibliotek. Schemat ich pobierania jest bardzo podobny do kroku wcześniejszego. Tym razem należy jednak wybrać z bocznego paska trzecią od góry ikonkę (zaznacz), a nastepnie wyszukać frazę zadanej biblioteki.
 ### dht sensor library
@@ -85,7 +85,7 @@ Biblioteka ta jest potrzebna do łatwiejszego formatowania danych przesyłanych 
 ![Zrzut ekranu prezentujący instalację biblioteki arduinojson](/media/biblioteka_arduinojson.png)
 ---
 
-<a name="konfiguracja]"></a>
+<a name="konfiguracja"></a>
 ## Dalsza konfiguracja
 Użyta przez nas płytka posiada wbudowany konwerter portu szeregowego, dlatego możena podłączyć ją do komputera poprzez port USB i poczekać na instalację sterowników.
 Przed wgraniem szkicu do podłączonego mikrokontrolera należy ustawić w Arduino IDE kilka ważnych ustawień.
