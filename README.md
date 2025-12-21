@@ -8,6 +8,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 3. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
 4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
 5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bilbliotek)
+6. [Dalsza konfiguracja](#konfiguracja)
 
 
 ---
@@ -56,22 +57,49 @@ W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontro
 
 <a name="Instalacja wymaganych bibliotek]"></a>
 ## Instalacja wymaganych bibliotek
-Do poprawnego działania naszej stacji pogodowej wymagane jest również zainstalowanie kilku dodatkowych bibliotek. Schemat ich pobierania jest identyczny co do kroku wcześniejszego. Należy więc wybrać z bocznego paska drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę zadanej biblioteki.
+Do poprawnego działania naszej stacji pogodowej wymagane jest również zainstalowanie kilku dodatkowych bibliotek. Schemat ich pobierania jest bardzo podobny do kroku wcześniejszego. Tym razem należy jednak wybrać z bocznego paska trzecią od góry ikonkę (zaznacz), a nastepnie wyszukać frazę zadanej biblioteki.
 ### dht sensor library
-Jak nazwa wsazuje jest do biblioteka czujnika DHT. Program poinformuje nas, że wybrana biblioteka wymaga do ziałania biblioteki „Adafruit Unified Sensor”. Klikamy przycisk „Zainstaluj wszystko”. Prezentuje to poniższy zrzut ekranu.
-![Zrzut ekranu prezetnujący instalację biblioteki do DHT](/media/biblioteka_DHT.png)
+Jak nazwa wsazuje jest do biblioteka czujnika DHT. Program poinformuje nas, że wybrana biblioteka wymaga do działania biblioteki „Adafruit Unified Sensor”. Klikamy przycisk „Zainstaluj wszystko”. Prezentuje to poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący instalację biblioteki do DHT](/media/biblioteka_DHT.png)
 
 ### mqunifiedsensor
-![Zrzut ekranu prezetnujący instalację biblioteki do MQ7](/media/biblioteka_mq.png)
+Bibliotek do obsługi czujnika MQ7.
+![Zrzut ekranu prezentujący instalację biblioteki do MQ7](/media/biblioteka_mq.png)
 ### dallastemperature
-![Zrzut ekranu prezetnujący instalację biblioteki Dallas](/media/biblioteka_dallas.png)
+Bibliotek do obsługi czujnika temperatury DS18B20 TO92 1-Wire Dallas.
+![Zrzut ekranu prezentujący instalację biblioteki Dallas](/media/biblioteka_dallas.png)
 ### onewire
-![Zrzut ekranu prezetnujący instalację biblioteki Onewire](/media/biblioteka_onewire.png)
+Kolejna biblioteka służąca do obłśugi czujnika temperatury.
+![Zrzut ekranu prezentujący instalację biblioteki Onewire](/media/biblioteka_onewire.png)
 ### adafruit ssd1306
-![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_adafruit.png)
+W tym przypadku podobnie jak z biblioteką „dht sensor library” pojawi się informacja, że wymagane są biblioteki „adafruit busio” i „adafruit gfx library”. Tak samo jak wcześniej klikamu przycisk „Zainstaluj wszystko”.
+![Zrzut ekranu prezentujący instalację biblioteki Adafruit](/media/biblioteka_adafruit.png)
 ### wifimanager
-![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_wifi.png)
+Biblioteka ta jest potrzeba do komunikacji przy użyciu wifi oraz do miniswerwera konfiguracyjnego wifi.
+![Zrzut ekranu prezentujący instalację biblioteki wifimanager](/media/biblioteka_wifi.png)
 ### pubsubclient
-![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_pubsubclient.png)
+Biblioteka jest potrzebna dla klienta mqtt.
+![Zrzut ekranu prezentujący instalację biblioteki pubsubclient](/media/biblioteka_pubsubclient.png)
 ### arduinojson
-![Zrzut ekranu prezetnujący instalację biblioteki Adafruit](/media/biblioteka_arduinojson.png)
+Biblioteka ta jest potrzebna do łatwiejszego formatowania danych przesyłanych później na serwer.
+![Zrzut ekranu prezentujący instalację biblioteki arduinojson](/media/biblioteka_arduinojson.png)
+---
+
+<a name="konfiguracja]"></a>
+## Dalsza konfiguracja
+Użyta przez nas płytka posiada wbudowany konwerter portu szeregowego, dlatego możena podłączyć ją do komputera poprzez port USB i poczekać na instalację sterowników.
+Przed wgraniem szkicu do podłączonego mikrokontrolera należy ustawić w Arduino IDE kilka ważnych ustawień.
+<br>Pierwszym z tych ustawień jest wybranie odpowiedniej płytki. Aby to zrobić należy kliknąć na „Wybierz płytkę” na pasku wstążki a następnie wybrać „ESP32 Family Device”. Prezentuje to poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący wybór płytki](/media/wybor_plytki.png)
+<br>
+Kolejnym krokiem jest kliknęcie zakładki „Narzędzia”, następnie wybranie opcji: płytka „ESP32 family device”, a następnie „esp32”. Z wyświetlonej listy należy wybrać wyświetlone na jej początku „ESP32S3 Dev Module”. Pdojęty wybór prezentuje poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący odpowiedni wybór w zakładce narzędzia](/media/wybor_narzedzia.png)
+Poprawne wybranie w poprzednim kroku spowoduje zmianę nazwy wybranej płytki. Zmianę tę prezentuje zrzut ekranu poniżej.
+![Zrzut ekranu prezentujący zmianę nazwy](/media/zmiana_nazwy.png)
+Następnym krokiem jest wybranie poprawnej ilości pamięci jaką posiada płytka. W naszym zestawie ma ona 16MB. Aby to zmienić należy ponownie kliknąć zakładkę „Narzędzia”, a następnie wybrać opcję „Flash Size: XMB”. Z rozwiniętej listy należy wybrać opcję „16MB (128Mb)”.  Poniżej znajduje się zrzut ekranu prezentujący zmianę tej opcji.
+![Zrzut ekranu prezentujący zmianę pamięci RAM](/media/zmiana_ramu.png)
+Ostatnim krokiem przed wgraniem szkicu należy ustawić prędkość jego wgrywania. Aby to zrobić należy podobnie jak w poprzednich krokach klikąć zakładkę „Narzędzia”, a następnie wybrać opcję „Upload Speed: X”. Z tej listy najlepiej wybrać jak największą wartość, którą jest w stanie obsłużyć podłączona płytka. W przypadku tego projektu należy wybrać opcję „512000”. Dokonywanie tej zmiany prezentuje poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący zmianę prędkości wgrywania](/media/zmiana_predkosci.png)
+Dla dodatkowej pewności można sprawdzić jeszcze, czy program poprawnie wykrywa podłączoną płytkę. Aby to zrobić, należy ponownie wybrać zakładkę „Narzędzia”, a następnie wybrać opcję „Pobierz informacje o płytce”. Wybranie tej opcji spowoduje wyświetlenie komunikatu. Poniżej znajdują się zrzuty ekranu prezentujące tę czynność.
+![Zrzut ekranu prezentujący pobieranie ifnormacji o płytce](/media/info1.png)
+![Zrzut ekranu prezentujący komunikat po pobraniu](/media/info2.png)
