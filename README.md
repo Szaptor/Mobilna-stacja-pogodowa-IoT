@@ -7,9 +7,10 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 2. [Schemat połączeń](#schemat-połączeń)
 3. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
 4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
-5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bilbliotek)
+5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bibliotek)
 6. [Dalsza konfiguracja](#dalsza-konfiguracja)
 7. [Wgrywanie szkicu](#wgrywanie-szkicu)
+8. [Dalsze prace](#dalsze-prace)
 
 ---
 <a name="Potrzebne materiały"></a>
@@ -31,6 +32,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 <a name="Schemat połączeń"></a>
 ## Schemat połączeń
 ![SCHEMAT POŁĄCZEŃ](/media/schemat_polaczen.jpg)
+
 ---
 
 <a name="Instalacja środowiska Arduino IDE]"></a>
@@ -46,6 +48,7 @@ Podczas pierwszego uruchomienia programu należy zezwolić na zainstalowanie opr
 Zalecamy również zmianę języka na polski. Można tego dokonać poprzez kliknięcie zakładki „File”, a następnie wybrać „Preferenes”, a w nich „Settings” - poniższy zrzut ekranu prezentuje wspominane miejsce.
 
 ![Okienko z ustawieniami umożliwiającymi zmianę języka](/media/zmiana_jezyka.png)
+
 ---
 
 <a name="Instalacja dodatku do obsługi ESP32"></a>
@@ -53,6 +56,7 @@ Zalecamy również zmianę języka na polski. Można tego dokonać poprzez klikn
 
 W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontrolera ESP32, należy z bocznego paska wybrać drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę „esp32”. Należy skupić się na drugiej pozycji która została udostępniona przez firmę Espressif Systems. Z rozwijlanego menu należy wybrać conajmniej wersję 3.3.3. W tym momencie można kliknąć przycisk „ZAINSTALUJ”. Sytuację tę prezentuje poniższy zrzut ekranu. Sama instalacja może potrwać kilka minut.
 ![Zrzut ekranu prezentujący wybór dodatku obsługująćego ESP32](/media/wybor_esp32.png)
+
 ---
 
 <a name="Instalacja wymaganych bibliotek"></a>
@@ -83,6 +87,7 @@ Biblioteka jest potrzebna dla klienta mqtt.
 ### arduinojson
 Biblioteka ta jest potrzebna do łatwiejszego formatowania danych przesyłanych później na serwer.
 ![Zrzut ekranu prezentujący instalację biblioteki arduinojson](/media/biblioteka_arduinojson.png)
+
 ---
 
 <a name="Dalsza konfiguracja"></a>
@@ -96,6 +101,7 @@ Kolejnym krokiem jest kliknęcie zakładki „Narzędzia”, następnie wybranie
 ![Zrzut ekranu prezentujący odpowiedni wybór w zakładce narzędzia](/media/wybor_narzedzia.png)
 Poprawne wybranie w poprzednim kroku spowoduje zmianę nazwy wybranej płytki. Zmianę tę prezentuje zrzut ekranu poniżej.
 ![Zrzut ekranu prezentujący zmianę nazwy](/media/zmiana_nazwy.png)
+
 Następnym krokiem jest wybranie poprawnej ilości pamięci jaką posiada płytka. W naszym zestawie ma ona 16MB. Aby to zmienić należy ponownie kliknąć zakładkę „Narzędzia”, a następnie wybrać opcję „Flash Size: XMB”. Z rozwiniętej listy należy wybrać opcję „16MB (128Mb)”.  Poniżej znajduje się zrzut ekranu prezentujący zmianę tej opcji.
 ![Zrzut ekranu prezentujący zmianę pamięci RAM](/media/zmiana_ramu.png)
 Ostatnim krokiem przed wgraniem szkicu należy ustawić prędkość jego wgrywania. Aby to zrobić należy podobnie jak w poprzednich krokach klikąć zakładkę „Narzędzia”, a następnie wybrać opcję „Upload Speed: X”. Z tej listy najlepiej wybrać jak największą wartość, którą jest w stanie obsłużyć podłączona płytka. W przypadku tego projektu należy wybrać opcję „512000”. Dokonywanie tej zmiany prezentuje poniższy zrzut ekranu.
@@ -110,7 +116,9 @@ Dla dodatkowej pewności można sprawdzić jeszcze, czy program poprawnie wykryw
 ## Wgrywanie szkicu
 ### Monitor portu szeregowego
 Przed rozpoczęciem wgrania szkicu należy jeszcze ustawić odpowiednią prędkość nasłuchiwania danych. Aby to zrobić należy zlokalizować w prawej górnej części okna Arduino IDE przycisk lupy odpowiadającego za monitor portu szeregowego. Prezentuje to poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący przycisk monitora](/media/monitor_przycisk.png)
+
 Kliknęcie tego przycisku spowoduje otwarcie dodatkowej zakładki w której będą pojawiać się udostępnione dane diagnostyczne. Teraz należy zmienić wartość prędkości nasłuchiwania danych. Domyślnie jest ona ustawiona na „9600 baud”. Należy zmienić tę wartość na zgodną z zaproponowanym przez nas szkicem projektu czyli na wartość „115200 baud”. Zmianę tę prezentują poniższe zrzuty ekranu.
 ![Zrzut ekranu prezentujący ekran monitora i domyślną prędkość](/media/monitor_domyslna.png)
 ![Zrzut ekranu prezentujący przycisk monitora](/media/monitor_zmiana.png)
@@ -123,17 +131,32 @@ Gotowy szkic należy pobrać z tego githuba: stacjaMeteo_bmp180.ino lub stacjaMe
 Aby otworzyć wybrany plik w Arduino IDE należy w pasku narzędzi wybrać opcję „Plik”, a następnie „Otwórz”. Teraz należy wybrać pobrany plik .ino z projektem. Wybranie opcji „Otwórz” prezentuje poniższy zrzut ekranu.
 ![Zrzut ekranu prezentujący wgrywanie pliku](/media/wgrywanie_pliku.png)
 W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy wybrać opcję OK” co prezentuje poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący komunikat](/media/komunikat_ok.png)
+
 W tym momencie powinno uruchomić się nowe okno z załadowanym szkicem.
 W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie w celu poprawnej komunikacji z serwerem MQTT.
+
 ![Zrzut ekranu prezentujący fragment kodu dotyczący dostosowania](/media/fragment_do_zmiany.png)
+
 Aby upewnić się, że program po zmianie kodu dalej jest poprawny należy go zweryfikować poprzez klinknięcie przycisku ptaszka/haczyka „Weryfikuj”, który pokazuje poniższy zrzut ekranu. Spowoduje to wstępną kompliację kodu projektu.
+
 ![Zrzut ekranu prezentujący przycisk do weryfikacji](/media/przycisk_weryfikuj.png)
+
 Sama weryfikacja może potrwać kilka minut. Proces ten prezentują poniższe zrzuty ekranu.
 ![Zrzut ekranu prezentujący przebieg weryfikacji](/media/weryfikacja.png)
 ![Zrzut ekranu prezentujący wynik weryfikacji](/media/wynik_weryfikacji.png)
 Jeżeli nie pojawiły się żadne błędy można przejść do wgrania szkicu do ESP32 poprzez kliknięcie przycisku strzałki „Prześlij” - znajduje się on obok poprzedniego. Prezentuje go poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący przycisk do przesyłania](/media/przycisk_przeslij.png)
+
 Samo przesyłanie również może potrwać kilka minut. Proces ten prezentują poniższe zrzuty ekranu.
 ![Zrzut ekranu prezentujący przebieg weryfikacji](/media/przesylanie.png)
 ![Zrzut ekranu prezentujący wynik weryfikacji](/media/wynik_przesylania.png)
+
+Wgranie szkicu spowoduje srestartowanie ESP32.
+
+---
+<a name="Dalsze prace"></a>
+## Dalsze prace
+Po pierwszym uruchomieniu ESP32 zostanie uruchomiony serwer ze stroną konfiguracyjną wyboru sieci WIFI oraz zmiany opcji MQTT. Należy wtedy połączyć się z właściwym access pointem udostępninoym przez ESP32. Domyślną nazwą tego będzie nazwa: "WeatherStationAP", a hasłem "12345678". Po połączeniu do tej sieci zostanie otwarta strona internetowa z której należy skorzystać w cely wyboru sieci WIFI z której ma korzystać ESP32 do wysyłania danych. Przechodzi się na niej w “Configure wifi” a następnie wybiera sieć. Kolejno wpisuje się jej dane i kończy kliknęciem “Save”. ESP32 powinno zamknąć hotspot i spróbować połączyć się z wskazaną siecią WIFI.
