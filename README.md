@@ -9,7 +9,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
 5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bilbliotek)
 6. [Dalsza konfiguracja](#dalsza-konfiguracja)
-
+7. [Wgrywanie szkicu](#wgrywanie-szkicu)
 
 ---
 <a name="Potrzebne materiały"></a>
@@ -103,3 +103,37 @@ Ostatnim krokiem przed wgraniem szkicu należy ustawić prędkość jego wgrywan
 Dla dodatkowej pewności można sprawdzić jeszcze, czy program poprawnie wykrywa podłączoną płytkę. Aby to zrobić, należy ponownie wybrać zakładkę „Narzędzia”, a następnie wybrać opcję „Pobierz informacje o płytce”. Wybranie tej opcji spowoduje wyświetlenie komunikatu. Poniżej znajdują się zrzuty ekranu prezentujące tę czynność.
 ![Zrzut ekranu prezentujący pobieranie ifnormacji o płytce](/media/info1.png)
 ![Zrzut ekranu prezentujący komunikat po pobraniu](/media/info2.png)
+
+---
+
+<a name="Wgrywanie szkicu"></a>
+## Wgrywanie szkicu
+### Monitor portu szeregowego
+Przed rozpoczęciem wgrania szkicu należy jeszcze ustawić odpowiednią prędkość nasłuchiwania danych. Aby to zrobić należy zlokalizować w prawej górnej części okna Arduino IDE przycisk lupy odpowiadającego za monitor portu szeregowego. Prezentuje to poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący przycisk monitora](/media/monitor_przycisk.png)
+Kliknęcie tego przycisku spowoduje otwarcie dodatkowej zakładki w której będą pojawiać się udostępnione dane diagnostyczne. Teraz należy zmienić wartość prędkości nasłuchiwania danych. Domyślnie jest ona ustawiona na „9600 baud”. Należy zmienić tę wartość na zgodną z zaproponowanym przez nas szkicem projektu czyli na wartość „115200 baud”. Zmianę tę prezentują poniższe zrzuty ekranu.
+![Zrzut ekranu prezentujący ekran monitora i domyślną prędkość](/media/monitor_domyslna.png)
+![Zrzut ekranu prezentujący przycisk monitora](/media/monitor_zmiana.png)
+Aby przetestować działanie monitora należy przykładowo kliknąć przycisk „reset” znajdujący się na płytce ESP32 w okolicach portu USB. Spowoduje to wyświetlenie logów wykonanych przez ESP32. Wynik powinien wyglądać podobnie do załączonego zrzutu ekranu poniżej.
+![Zrzut ekranu prezentujący test monitora](/media/monitor_test_reset.png)
+
+### Wgrywanie szkicu
+Gotowy szkic należy pobrać z tego githuba: stacjaMeteo_bmp180.ino lub stacjaMeteo_bmp280.ino.
+
+Aby otworzyć wybrany plik w Arduino IDE należy w pasku narzędzi wybrać opcję „Plik”, a następnie „Otwórz”. Teraz należy wybrać pobrany plik .ino z projektem. Wybranie opcji „Otwórz” prezentuje poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący wgrywanie pliku](/media/wgrywanie_pliku.png)
+W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy wybrać opcję OK” co prezentuje poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący komunikat](/media/komunikat_ok.png)
+W tym momencie powinno uruchomić się nowe okno z załadowanym szkicem.
+W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie w celu poprawnej komunikacji z serwerem MQTT.
+![Zrzut ekranu prezentujący fragment kodu dotyczący dostosowania](/media/fragment_do_zmiany.png)
+Aby upewnić się, że program po zmianie kodu dalej jest poprawny należy go zweryfikować poprzez klinknięcie przycisku ptaszka/haczyka „Weryfikuj”, który pokazuje poniższy zrzut ekranu. Spowoduje to wstępną kompliację kodu projektu.
+![Zrzut ekranu prezentujący przycisk do weryfikacji](/media/przycisk_weryfikuj.png)
+Sama weryfikacja może potrwać kilka minut. Proces ten prezentują poniższe zrzuty ekranu.
+![Zrzut ekranu prezentujący przebieg weryfikacji](/media/weryfikacja.png)
+![Zrzut ekranu prezentujący wynik weryfikacji](/media/wynik_weryfikacji.png)
+Jeżeli nie pojawiły się żadne błędy można przejść do wgrania szkicu do ESP32 poprzez kliknięcie przycisku strzałki „Prześlij” - znajduje się on obok poprzedniego. Prezentuje go poniższy zrzut ekranu.
+![Zrzut ekranu prezentujący przycisk do przesyłania](/media/przycisk_przeslij.png)
+Samo przesyłanie również może potrwać kilka minut. Proces ten prezentują poniższe zrzuty ekranu.
+![Zrzut ekranu prezentujący przebieg weryfikacji](/media/przesylanie.png)
+![Zrzut ekranu prezentujący wynik weryfikacji](/media/wynik_przesylania.png)
