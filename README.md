@@ -10,7 +10,7 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bibliotek)
 6. [Dalsza konfiguracja](#dalsza-konfiguracja)
 7. [Wgrywanie szkicu](#wgrywanie-szkicu)
-8. [Dalsze prace](#dalsze-prace)
+8. [Konfiguracja do połączenia z serwerem MQTT](#konfiguracja-do-połączenia-z-serwerem-mqtt)
 
 ---
 <a name="Potrzebne materiały"></a>
@@ -157,6 +157,10 @@ Samo przesyłanie również może potrwać kilka minut. Proces ten prezentują p
 Wgranie szkicu spowoduje srestartowanie ESP32.
 
 ---
-<a name="Dalsze prace"></a>
-## Dalsze prace
-Po pierwszym uruchomieniu ESP32 zostanie uruchomiony serwer ze stroną konfiguracyjną wyboru sieci WIFI oraz zmiany opcji MQTT. Należy wtedy połączyć się z właściwym access pointem udostępninoym przez ESP32. Domyślną nazwą tego będzie nazwa: "WeatherStationAP", a hasłem "12345678". Po połączeniu do tej sieci zostanie otwarta strona internetowa z której należy skorzystać w cely wyboru sieci WIFI z której ma korzystać ESP32 do wysyłania danych. Przechodzi się na niej w “Configure wifi” a następnie wybiera sieć. Kolejno wpisuje się jej dane i kończy kliknęciem “Save”. ESP32 powinno zamknąć hotspot i spróbować połączyć się z wskazaną siecią WIFI.
+<a name="Konfiguracja do połączenia z serwerem MQTT"></a>
+## Konfiguracja do połączenia z serwerem MQTT
+Po pierwszym uruchomieniu ESP32 zostanie uruchomiony serwer ze stroną konfiguracyjną wyboru sieci WIFI oraz zmiany opcji MQTT. Należy wtedy połączyć się z właściwym access pointem udostępninoym przez ESP32. Domyślną nazwą tego będzie nazwa: "WeatherStationAP", a hasłem "12345678". Zrzut ekranu poniżej prezentuje tą sieć.
+![Zrzut ekranu prezentujący sieć](/media/siec.png)
+Po połączeniu do tej sieci zostanie otwarta strona internetowa z której należy skorzystać w cely wyboru sieci WIFI z której ma korzystać ESP32 do wysyłania danych. Przechodzi się na niej w “Configure wifi” a następnie wybiera sieć. Kolejno wpisuje się jej dane i kończy kliknęciem “Save”. ESP32 powinno zamknąć hotspot i spróbować połączyć się z wskazaną siecią WIFI. Poniżej znadują się zrzuty ekranu prezentujące stronę internetową i przykład konfiguracji.
+![Zrzut ekranu prezentujący stronę](/media/strona.png)
+![Zrzut ekranu prezentujący konfigurację sieci do której ESP32 ma się połączyć](/media/konfiguracja_sieci.png)
