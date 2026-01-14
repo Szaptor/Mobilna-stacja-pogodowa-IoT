@@ -5,19 +5,30 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 
 1. [Potrzebne materiały](#potrzebne-materiały)
 2. [Schemat połączeń](#schemat-połączeń)
-3. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
-4. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
-5. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bibliotek)
-6. [Dalsza konfiguracja](#dalsza-konfiguracja)
-7. [Wgrywanie szkicu](#wgrywanie-szkicu)
-8. [Konfiguracja do połączenia z serwerem MQTT](#konfiguracja-do-połączenia-z-serwerem-mqtt)
-
+3. [Proces konstrukcji układu](#konstrukcja)
+4. [Instalacja środowiska Arduino IDE](#instalacja-środowiska-arduino-ide)
+5. [Instalacja dodatku do obsługi ESP32](#instalacja-dodatku-do-obsługi-esp32)
+6. [Instalacja wymaganych bibliotek](#instalacja-wymaganych-bibliotek)
+7. [Dalsza konfiguracja](#dalsza-konfiguracja)
+8. [Wgrywanie szkicu](#wgrywanie-szkicu)
+9. [Konfiguracja do połączenia z serwerem MQTT](#konfiguracja-do-połączenia-z-serwerem-mqtt)
+10. [Środowisko archiwizacji i wizualizacji danych MQTT – ThingsBoard](#tb)
+11. [Konfiguracja środowiska ThingsBoard](#config-tb)
 ---
+
 <a name="Potrzebne materiały"></a>
 ## Potrzebne materiały
 
 ### ESP32-S3-WROOM-1-N8R8 WiFi/Bluetooth 16MB
 ![ESP32-WROOM](/media/ESP32-3s-wroom1.jpg)
+
+W projekcie stacji pogodowej wykorzystaliśmy podane niżej piny:
+* 5V0, 3V3, GND dla zasilania czujników i ekranu
+* GPIO4 jako linia sygnałowa czujnika temperatury (DS18B20)
+* GPIO11 jako linia sygnałowa czujnika wilgotności (DHT22)
+* GPIO8 jako linia sygnałowa czujnika telenku węgla (MQ7)
+* GPIO6 i GPIO7 jako linie sygnałowe wyświetlacza OLED
+  
 ![piny](/media/piny.jpg)
 ### Wyświetlacz OLED niebieski graficzny 0,96'' 128x64px I2C
 ![OLED](/media/OLED.jpg)
@@ -27,12 +38,36 @@ Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rze
 ![Czujnik temperatury DS18B20](/media/czujnik_temperatury.jpg)
 ### Moduł DHT22 Czujnik Temperatury i Wilgotności Black
 ![Czujnik wilgotnośc DHT22](/media/czujnik_wilgotnosci.jpg)
-
+### Dodatkowe elementy
+Na potrzeby naszego układu należy dodatkowo przygotować:
+* płytkę/ki stykową/we
+* kilkanaście przwodów male-male oraz kilka female-male zależnie od charakterystyki posiadanych czujników
+* 1x rezystor 4,7 kOhm
+* 1 x rezystor 10 kOhm
+* 1 x rezystor 20 kOhm
 ---
+
 <a name="Schemat połączeń"></a>
 ## Schemat połączeń
 ![SCHEMAT POŁĄCZEŃ](/media/schemat_polaczen.jpg)
+---
 
+<a name="konstrukcja"></a>
+## Proces konstrukcji układu
+Przygotowanie układu najlepiej rozpocząć od umieszczenia na płytce stykowej mikrokontrolera ESP32 oraz czujników i ekranu (jeżeli jest na to miejsce to dokładnie tak jak przedstawiono na schemacie podłączeń). Następnie należy umieścić odpowiednio rezystory. Rezystor 4,7 kOhm należy ustawić na płytce stykowej łącząc nim linie sygnałową (przewód kolorowy najczęściej pomarańczowy/biały) z przewodem zasilania (czerwony +) czujnika temperatury. Rezystory 10 i 20 kOhm należy umieścić tak, aby ich jedna strona znajdowała się na tej samej linii sygnałowej. 
+
+Następnie należy doprowadzić do wszystkich czujników i wyświetlacza masę (czarny -) przewodami z mikrokontrolera ESP32. Dodatkowo do jednej strony rezystora 20 kOhm należy doprowadzić też masę (należy pamiętać o zasadzie działania płytki stykowej!)
+
+Następnym krokiem jest doprowadzenie do wszystkich do wszystkich czujników i wyświetlacza odpowiedniego zasilania. Przewodami (czerwony +) połączyć z mikrokontrolera ESP32, do czujnika wilgotności, temperatury i wyświetlacza OLED – 3V3, a do czujnika tlenku węgla 5V0.
+
+Ostatnim krokiem jest połączenie przewodami wg schematu:
+* pin GPIO6 do pinu SDA wyświetlacza, GPIO7 do pinu SCL wyświetlacza, 
+* pin GPIO4 do jednej strony rezystora 4,7 kOhm podłączonego do linii sygnałowej czujnika temperatury,
+- pin GPIO11 do pinu OUT czujnika wilgotności
+* pin GPIO08 do jednej strony rezystora 10 kOhm
+* dodatkowo od strony rezystora 20 kOhm, która jest niepodłączona do masy, należy doprowadzić przewód do kolorowego (najczęściej niebieskiego) przewodu czujnika tlenku węgla odpowiadającego za linię sygnałową.
+
+![GRAFIKA Z KOŃCOWYM PROJEKTEM](/media/projekt.jpg)
 ---
 
 <a name="Instalacja środowiska Arduino IDE]"></a>
@@ -130,7 +165,7 @@ Gotowy szkic należy pobrać z tego githuba: stacjaMeteo_bmp180.ino lub stacjaMe
 
 Aby otworzyć wybrany plik w Arduino IDE należy w pasku narzędzi wybrać opcję „Plik”, a następnie „Otwórz”. Teraz należy wybrać pobrany plik .ino z projektem. Wybranie opcji „Otwórz” prezentuje poniższy zrzut ekranu.
 ![Zrzut ekranu prezentujący wgrywanie pliku](/media/wgrywanie_pliku.png)
-W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy wybrać opcję OK” co prezentuje poniższy zrzut ekranu.
+W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy wybrać opcję „OK” co prezentuje poniższy zrzut ekranu.
 
 ![Zrzut ekranu prezentujący komunikat](/media/komunikat_ok.png)
 
@@ -160,7 +195,79 @@ Wgranie szkicu spowoduje srestartowanie ESP32.
 <a name="Konfiguracja do połączenia z serwerem MQTT"></a>
 ## Konfiguracja do połączenia z serwerem MQTT
 Po pierwszym uruchomieniu ESP32 zostanie uruchomiony serwer ze stroną konfiguracyjną wyboru sieci WIFI oraz zmiany opcji MQTT. Należy wtedy połączyć się z właściwym access pointem udostępninoym przez ESP32. Domyślną nazwą tego będzie nazwa: "WeatherStationAP", a hasłem "12345678". Zrzut ekranu poniżej prezentuje tą sieć.
+
 ![Zrzut ekranu prezentujący sieć](/media/siec.png)
+
 Po połączeniu do tej sieci zostanie otwarta strona internetowa z której należy skorzystać w cely wyboru sieci WIFI z której ma korzystać ESP32 do wysyłania danych. Przechodzi się na niej w “Configure wifi” a następnie wybiera sieć. Kolejno wpisuje się jej dane i kończy kliknęciem “Save”. ESP32 powinno zamknąć hotspot i spróbować połączyć się z wskazaną siecią WIFI. Poniżej znadują się zrzuty ekranu prezentujące stronę internetową i przykład konfiguracji.
+
 ![Zrzut ekranu prezentujący stronę](/media/strona.png)
+
 ![Zrzut ekranu prezentujący konfigurację sieci do której ESP32 ma się połączyć](/media/konfiguracja_sieci.png)
+
+---
+<a name="tb"></a>
+## Środowisko archiwizacji i wizualizacji danych MQTT – ThingsBoard
+ThingsBoard to otwartoźródłowa (open-source) platforma IoT (Internet Rzeczy), która służy do łączenia, zarządzania, wizualizacji danych i przetwarzania informacji pochodzących z urządzeń IoT, oferując skalowalną i elastyczną infrastrukturę, dostępną w wersji darmowej (Community Edition) i płatnej (Professional Edition) dla rozwiązań w chmurze lub on-premise, obsługując protokoły takie jak MQTT, CoAP, HTTP. 
+Kluczowe funkcje i cechy:
+* Zarządzanie urządzenjami: Łączenie, monitorowanie i zdalne sterowanie urządzeniami.
+* Gromadzenie i przetwarzanie danych: Zbiera dane, które następnie można przetwarzać za pomocą wbudowanego silnika reguł (rule engine).
+* Wizualizacja: Tworzenie pulpitów (dashboards) i wizualizacji danych w czasie rzeczywistym.
+* Skalowalność i niezawodność: Zaprojektowana do obsługi dużej liczby urządzeń, z możliwością skalowania poziomego i odpornością na awarie (fault-tolerant).
+* Protokoły: Obsługuje popularne protokoły IoT, w tym MQTT, CoAP, HTTP, LWM2M.
+* Elastyczność: Umożliwia budowanie zarówno prototypów, jak i produkcyjnych rozwiązań.
+
+### Jak korzystać z środowiska ThingsBoard?
+Jak wspomnieliśmy powyżej istnieją dwie opcje korzystania z ThingsBoard - darmowa i płatna. Przy wyborze darmowej należy zainstalować serwer samemu. Najlepiej kierować się przy tym poradnikiem zawartym na tej stronie:
+
+https://thingsboard.io/docs/user-guide/install/ubuntu/
+
+W przypadku rozwiązania płatnego należy skorzystać z gotowego hostingu usługi. Informacje zawarte są na tej stronie:
+
+https://thingsboard.io/pricing/
+
+---
+<a name="config-tb"></a>
+## Konfiguracja środowiska ThingsBoard dla naszej stacji pogodowej
+1. [Konfiguracja urządzenia](#config-tb-dev)
+2. [Konfiguracja panelu](#config-tb-panel)
+<a name="config-tb-dev"></a>
+### Konfiguracja urządzenia
+Aby skonfigurować urządzenie należy wejść na adresu swojego panelu Thingsboard i zalogować się na swoje konto. Po zalogowaniu należy z bocznego paska nawigacyjnego wybrać zakładkę „Obiekty”, a po jej rozwinięciu „Urządzenia”. W panelu tym należy kliknąć znak „+”, a następnie „Dodaj nowe urządzenie”. Poniższe zrzuty ekranu prezentują znalezienie wspomnianej zakładki oraz lokalizację znaku „+”.
+
+![Zrzut ekranu widok panelu](/media/panel.png)
+
+![Zrzut ekranu prezentujący zakładkę Urządzenia](/media/urzadzenia.png)
+
+W otwartym oknie należy wpisać nazwę swojego urządzenia. W tym przypadku jest to stacja pogodowa, dlatego używamy nazwy „Stacja_pogodowa”. Na razie pozostałe parametry nie są potrzebne, dlatego można je pominąć i kliknąć przycisk „Dalej”. Zrzut z okna dodawania urządzenia znajduje się poniżej.
+
+![Zrzut ekranu prezentujący okno dodawania urządzenia](/media/dodawanie_urzadzenia.png)
+
+Wykonanie tego spowoduje pojawienie się nowego urządzenia o podanej nazwie na liście. Należy teraz kliknąć ten wpis na liście w celu otwarcia okna edycji parametrów. W nowo otwartej zakładce urządzenia należy wybrać przycisk „Zarządzaj danymi uwierzytelniającymi” co otworzy nowe okno, w którym należy wybrać protokół „MQTT Basic”. W wyniku tego działania pokaże się formularz konfiguracyjny poświadczeń dostępu dla naszego urządzenia do serwera Thingsboard poprzez protokół MQTT. Pole te można wypełnić według uznania, ALE CO WAŻNE **poświadczenia te muszą się zgadzać z poświadczeniami które zostały lub będą wpisane w odpowiednie zmienne w wgrywanym szkicu Arduino**. W celu zapisania poświadczeń należy kliknąć przycisk „Zapisz”. Poniższe zrzuty ekranu prezentują wyżej wspomniane czynności. 
+
+![Zrzut ekranu prezentujący okno urzadzenia](/media/okno_urzadzenia.png)
+
+![Zrzut ekranu prezentujący okno poświadczeń](/media/poswiadczenia.png)
+
+![Zrzut ekranu prezentujący przykładowe poświadczenia](/media/przyklad_poswiadczen.png)
+
+---
+<a name="config-tb-panel"></a>
+### Konfiguracja panelu
+Kolejnym krokiem jest utworzenie panelu. Panel ten umożliwi wyświetlanie informacji przesyłanych przez urządzenie. Oczywiście można utworzyć własny wygląd panelu, jednak można skorzystać z wcześniej przygotowanego przez nas wzoru. Aby to zrobić należy z panelu nawigacyjnego z boku wybrać zakładkę „Panele”, a następnie kliknąć znak „+” i wybrać opcję „Importuj panel”. Prezentuj to poniższy zrzut ekranu.
+
+![Zrzut ekranu prezentujący zakładkę Panele](/media/panele.png)
+
+Należy teraz pobrać udostępniony przez nas pliku panelu dla stacji pogodowej ![LINK TO DO](/src/backend/README.md), a następnie przeciągnąć go lub wybrać go z okna importu panelu. Po jego pojawieniu się należy kliknąć przycisk „Importuj”. Poniżej znajduje się zrzut ekranu pokazujący to okno.
+
+![Zrzut ekranu prezentujący okno importu panelu](/media/import_panelu.png)
+
+Po zaimportowaniu panelu pojawi się on na liście jako nowa pozycja co prezentuje poniższy zrzut ekranu.
+
+![Zrzut ekranu prezentujący listę paneli](/media/lista_paneli.png)
+
+Należy teraz kliknąć w ten panel i **GOTOWE!** Od tego momentu można z niego korzystać do śledzenia na żywo pomiarów nowo utworzonej stacji pogodowej. Można teraz włączyć stację pogodową i oczekiwać na uzyskanie od niej pierwszych pomiarów w oknie panelu.
+
+#### UWAGA - JEŻELI USTAWIONO INNĄ NAZWĘ URZĄDZENIA
+Jeżeli ustawiono inną nazwę urządzenia należy kliknąć w przycisk „Edit mode” otwartego już gotowego panelu i kolejno zmieniać w każdym z widżetów nazwę urządzenia na swoje. Aby to wykonwać należy wybierać ikonkę ołówka. Lokalizację przycisku „Edit mode” pokazuje poniższy zrzut ekranu.
+
+![Zrzut ekranu prezentujący przycisk Edit mode](/media/edit_mode.png)
