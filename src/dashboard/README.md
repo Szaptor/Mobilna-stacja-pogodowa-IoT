@@ -1,1 +1,1 @@
-folder na kod dashboard'u
+# Folder na kod dashboard'u - panelu na platformie ThingsBoard
