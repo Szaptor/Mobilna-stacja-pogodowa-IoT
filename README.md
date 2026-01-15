@@ -265,9 +265,11 @@ Po zaimportowaniu panelu pojawi się on na liście jako nowa pozycja co prezentu
 
 ![Zrzut ekranu prezentujący listę paneli](/media/lista_paneli.png)
 
-Należy teraz kliknąć w ten panel i **GOTOWE!** Od tego momentu można z niego korzystać do śledzenia na żywo pomiarów nowo utworzonej stacji pogodowej. Można teraz włączyć stację pogodową i oczekiwać na uzyskanie od niej pierwszych pomiarów w oknie panelu.
+Należy teraz kliknąć w ten panel i **GOTOWE!** Od tego momentu można z niego korzystać do śledzenia na żywo pomiarów nowo utworzonej stacji pogodowej. Można teraz włączyć stację pogodową i oczekiwać na uzyskanie od niej pierwszych pomiarów w oknie panelu. Zrzut ekranu poniżej prezentuje poprawnie działający panel.
 
-#### UWAGA - JEŻELI USTAWIONO INNĄ NAZWĘ URZĄDZENIA
+![Zrzut ekranu prezentujący poprawnie działający panel](/media/dzialajacy_panel.png)
+
+#### $${\color{red}* UWAGA}$$  - JEŻELI  USTAWIONO  INNĄ  NAZWĘ  URZĄDZENIA
 Jeżeli ustawiono inną nazwę urządzenia należy kliknąć w przycisk „Edit mode” otwartego już gotowego panelu i kolejno zmieniać w każdym z widżetów nazwę urządzenia na swoje. Aby to wykonwać należy wybierać ikonkę ołówka. Lokalizację przycisku „Edit mode” pokazuje poniższy zrzut ekranu.
 
 ![Zrzut ekranu prezentujący przycisk Edit mode](/media/edit_mode.png)
