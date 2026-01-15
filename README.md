@@ -1,5 +1,20 @@
-# Mobilna-stacja-pogodowa-IoT
-Projekt mobilnej stacji pogodowej na przedmiot „Budowa systemów internetu rzeczy” by Dominik But oraz Bartosz Zawadzki
+# Mobilna stacja pogodowa - projekt IoT
+Niniejsze repozytorium jest poświęcone projektowi IoT mobilnej stacji pogodowej. Projekt składa się z czujników podłączonego do mikrokontrolera, który komunikuje się protokołem MQTT z panel na otwartoźródłowej platformie IoT ThingsBoard.
+
+Do rozpoczęcia pracy z projektem poza później wyszczególnionymi materiałami wymagane jest posiadanie dostępu do platformy ThingsBoard, dane służące połączeniu się z nią przez MQTTT basic; urządzenie z dostępem do WiFi w celu późniejszego połączenia się z Access Pointem mikrokontrolera oraz komputer z Arduino IDE.
+
+## Przykład poprawnie złożonej i działającej stacji pgoodowej
+
+![Zdjęcie prezentujące poprawnie działającą stację](/media/zdjecie_dzialajacej_stacji.jpg)
+
+## Przykład poprawnie skonfigurowanego i działającego panelu na platformie ThingsBoard.
+
+![Zrzut ekranu prezentujący poprawnie działający panel](/media/dzialajacy_panel.png)
+
+## Podział prac w projekcie
+| Dominik But | Bartosz Zawadzki |
+| ----------- | ---------------- |
+|Pomysłodawca, główny monter oraz programista|Pomoc w montowaniu i programowaniu, dokumentacja|
 
 ## Spis treści
 
@@ -119,12 +134,12 @@ Jak nazwa wsazuje jest do biblioteka czujnika DHT. Program poinformuje nas, że 
 ![Zrzut ekranu prezentujący instalację biblioteki do DHT](/media/biblioteka_DHT.png)
 
 ### mqunifiedsensor
-Bibliotek do obsługi czujnika MQ7.
+Biblioteka do obsługi czujnika MQ7.
 
 ![Zrzut ekranu prezentujący instalację biblioteki do MQ7](/media/biblioteka_mq.png)
 
 ### dallastemperature
-Bibliotek do obsługi czujnika temperatury DS18B20 TO92 1-Wire Dallas.
+Biblioteka do obsługi czujnika temperatury DS18B20 TO92 1-Wire Dallas.
 
 ![Zrzut ekranu prezentujący instalację biblioteki Dallas](/media/biblioteka_dallas.png)
 
@@ -328,3 +343,5 @@ Należy teraz kliknąć w ten panel i **GOTOWE!** Od tego momentu można z niego
 Jeżeli ustawiono inną nazwę urządzenia należy kliknąć w przycisk „Edit mode” otwartego już gotowego panelu i kolejno zmieniać w każdym z widżetów nazwę urządzenia na swoje. Aby to wykonwać należy wybierać ikonkę ołówka. Lokalizację przycisku „Edit mode” pokazuje poniższy zrzut ekranu.
 
 ![Zrzut ekranu prezentujący przycisk Edit mode](/media/edit_mode.png)
+
+# DZIĘKUJEMY ZA ŚLEDZENIE NINIEJSZEGO PORADNIKA I ŻYCZYMY POWODZENIA!
