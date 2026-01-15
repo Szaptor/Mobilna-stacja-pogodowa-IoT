@@ -16,6 +16,12 @@ Do rozpoczęcia pracy z projektem poza później wyszczególnionymi materiałami
 | ----------- | ---------------- |
 |Pomysłodawca, główny monter oraz programista|Pomoc w montowaniu i programowaniu, dokumentacja|
 
+## Struktura niniejszego repozytorium
+* W niniejszym pliku README.md znajduje się cała dokumentacja, wraz z poradnikiem jak odtworzyć nasz projekt.
+* W folderze media znajdują się wszystkie użyte w tym pliku zdjęcia i zrzuty ekranu.
+* Folder src zawiera pliki źródłowe dla mikrokontrolera i panelu. Odnośniki do odpowiednich znajdują się w niniejszym pliku.
+* Plik LICENSE zawiera informacje o licencji.
+  
 ## Spis treści
 
 1. [Potrzebne materiały](#potrzebne-materiały)
