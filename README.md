@@ -3,7 +3,7 @@ Niniejsze repozytorium jest poświęcone projektowi IoT mobilnej stacji pogodowe
 
 Do rozpoczęcia pracy z projektem poza później wyszczególnionymi materiałami wymagane jest posiadanie dostępu do platformy ThingsBoard, dane służące połączeniu się z nią przez MQTTT basic; urządzenie z dostępem do WiFi w celu późniejszego połączenia się z Access Pointem mikrokontrolera oraz komputer z Arduino IDE.
 
-## Przykład poprawnie złożonej i działającej stacji pgoodowej
+## Przykład poprawnie złożonej i działającej stacji pogodowej
 
 ![Zdjęcie prezentujące poprawnie działającą stację](/media/zdjecie_dzialajacej_stacji.jpg)
 
