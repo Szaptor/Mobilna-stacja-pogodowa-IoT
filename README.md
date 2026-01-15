@@ -77,11 +77,13 @@ Poniższe zdjęcie prezentuje przykadową ukonczoną konstrukcję układu.
 [Pobieramy Arduino IDE z tej lokalizacji](https://www.arduino.cc/en/software/)
    
 ![Zrzut ekranu prezentujący stronę](/media/instalacjaIDE.png)
+
 W trakcie instalacji zalecamy pozostawienie opcji domyślnych.
 
 Podczas pierwszego uruchomienia programu należy zezwolić na zainstalowanie oprogramowania oraz poczekać na instalacje wszystkich sterowników USB i dodatków wymaganych przez IDE.
    
 ![Zapytanie o zezwolenie](/media/zezwol.png)
+
 Zalecamy również zmianę języka na polski. Można tego dokonać poprzez kliknięcie zakładki „File”, a następnie wybrać „Preferenes”, a w nich „Settings” - poniższy zrzut ekranu prezentuje wspominane miejsce.
 
 ![Okienko z ustawieniami umożliwiającymi zmianę języka](/media/zmiana_jezyka.png)
@@ -92,6 +94,7 @@ Zalecamy również zmianę języka na polski. Można tego dokonać poprzez klikn
 ## Instalacja dodatku do obsługi ESP32
 
 W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontrolera ESP32, należy z bocznego paska wybrać drugą od góry ikonkę (zaznacz), a nastepnie wyszukać frazę „esp32”. Należy skupić się na drugiej pozycji która została udostępniona przez firmę Espressif Systems. Z rozwijlanego menu należy wybrać conajmniej wersję 3.3.3. W tym momencie można kliknąć przycisk „ZAINSTALUJ”. Sytuację tę prezentuje poniższy zrzut ekranu. Sama instalacja może potrwać kilka minut.
+
 ![Zrzut ekranu prezentujący wybór dodatku obsługująćego ESP32](/media/wybor_esp32.png)
 
 ---
@@ -101,6 +104,7 @@ W celu instalacji menadżera płytek do obsługi wybranego przez nas mikrokontro
 Do poprawnego działania naszej stacji pogodowej wymagane jest również zainstalowanie kilku dodatkowych bibliotek. Schemat ich pobierania jest bardzo podobny do kroku wcześniejszego. Tym razem należy jednak wybrać z bocznego paska trzecią od góry ikonkę (zaznacz), a nastepnie wyszukać frazę zadanej biblioteki.
 ### dht sensor library
 Jak nazwa wsazuje jest do biblioteka czujnika DHT. Program poinformuje nas, że wybrana biblioteka wymaga do działania biblioteki „Adafruit Unified Sensor”. Klikamy przycisk „Zainstaluj wszystko”. Prezentuje to poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący instalację biblioteki do DHT](/media/biblioteka_DHT.png)
 
 ### mqunifiedsensor
@@ -132,19 +136,29 @@ Biblioteka ta jest potrzebna do łatwiejszego formatowania danych przesyłanych 
 Użyta przez nas płytka posiada wbudowany konwerter portu szeregowego, dlatego możena podłączyć ją do komputera poprzez port USB i poczekać na instalację sterowników.
 Przed wgraniem szkicu do podłączonego mikrokontrolera należy ustawić w Arduino IDE kilka ważnych ustawień.
 <br>Pierwszym z tych ustawień jest wybranie odpowiedniej płytki. Aby to zrobić należy kliknąć na „Wybierz płytkę” na pasku wstążki a następnie wybrać „ESP32 Family Device”. Prezentuje to poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący wybór płytki](/media/wybor_plytki.png)
 <br>
 Kolejnym krokiem jest kliknęcie zakładki „Narzędzia”, następnie wybranie opcji: płytka „ESP32 family device”, a następnie „esp32”. Z wyświetlonej listy należy wybrać wyświetlone na jej początku „ESP32S3 Dev Module”. Pdojęty wybór prezentuje poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący odpowiedni wybór w zakładce narzędzia](/media/wybor_narzedzia.png)
+
 Poprawne wybranie w poprzednim kroku spowoduje zmianę nazwy wybranej płytki. Zmianę tę prezentuje zrzut ekranu poniżej.
+
 ![Zrzut ekranu prezentujący zmianę nazwy](/media/zmiana_nazwy.png)
 
 Następnym krokiem jest wybranie poprawnej ilości pamięci jaką posiada płytka. W naszym zestawie ma ona 16MB. Aby to zmienić należy ponownie kliknąć zakładkę „Narzędzia”, a następnie wybrać opcję „Flash Size: XMB”. Z rozwiniętej listy należy wybrać opcję „16MB (128Mb)”.  Poniżej znajduje się zrzut ekranu prezentujący zmianę tej opcji.
+
 ![Zrzut ekranu prezentujący zmianę pamięci RAM](/media/zmiana_ramu.png)
+
 Ostatnim krokiem przed wgraniem szkicu należy ustawić prędkość jego wgrywania. Aby to zrobić należy podobnie jak w poprzednich krokach klikąć zakładkę „Narzędzia”, a następnie wybrać opcję „Upload Speed: X”. Z tej listy najlepiej wybrać jak największą wartość, którą jest w stanie obsłużyć podłączona płytka. W przypadku tego projektu należy wybrać opcję „512000”. Dokonywanie tej zmiany prezentuje poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący zmianę prędkości wgrywania](/media/zmiana_predkosci.png)
+
 Dla dodatkowej pewności można sprawdzić jeszcze, czy program poprawnie wykrywa podłączoną płytkę. Aby to zrobić, należy ponownie wybrać zakładkę „Narzędzia”, a następnie wybrać opcję „Pobierz informacje o płytce”. Wybranie tej opcji spowoduje wyświetlenie komunikatu. Poniżej znajdują się zrzuty ekranu prezentujące tę czynność.
+
 ![Zrzut ekranu prezentujący pobieranie ifnormacji o płytce](/media/info1.png)
+
 ![Zrzut ekranu prezentujący komunikat po pobraniu](/media/info2.png)
 
 ---
@@ -171,8 +185,9 @@ W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy 
 
 ![Zrzut ekranu prezentujący komunikat](/media/komunikat_ok.png)
 
+<a name="poswiadczenia_kod"></a>
 W tym momencie powinno uruchomić się nowe okno z załadowanym szkicem.
-W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie w celu poprawnej komunikacji z serwerem MQTT.
+W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie, które będą zgadzały się z [poświadczeniami skonfigurowanymi dla urządzenia na platformie ThingsBoard](#poswiadczenia_panel) w celu poprawnej komunikacji z serwerem MQTT.
 
 ![Zrzut ekranu prezentujący fragment kodu dotyczący dostosowania](/media/fragment_do_zmiany.png)
 
@@ -240,17 +255,20 @@ Aby skonfigurować urządzenie należy wejść na adresu swojego panelu Thingsbo
 
 ![Zrzut ekranu prezentujący zakładkę Urządzenia](/media/urzadzenia.png)
 
-W otwartym oknie należy wpisać nazwę swojego urządzenia. W tym przypadku jest to stacja pogodowa, dlatego używamy nazwy „Stacja_pogodowa”. Na razie pozostałe parametry nie są potrzebne, dlatego można je pominąć i kliknąć przycisk „Dalej”. Zrzut z okna dodawania urządzenia znajduje się poniżej.
+W otwartym oknie należy wpisać nazwę swojego urządzenia. W tym przypadku jest to stacja pogodowa, dlatego używamy nazwy „Stacja_Pogodowa”. Na razie pozostałe parametry nie są potrzebne, dlatego można je pominąć i kliknąć przycisk „Dalej: Dane uwierzytelniające”. Zrzut z okna dodawania urządzenia znajduje się poniżej.
 
 ![Zrzut ekranu prezentujący okno dodawania urządzenia](/media/dodawanie_urzadzenia.png)
 
-Wykonanie tego spowoduje pojawienie się nowego urządzenia o podanej nazwie na liście. Należy teraz kliknąć ten wpis na liście w celu otwarcia okna edycji parametrów. W nowo otwartej zakładce urządzenia należy wybrać przycisk „Zarządzaj danymi uwierzytelniającymi” co otworzy nowe okno, w którym należy wybrać protokół „MQTT Basic”. W wyniku tego działania pokaże się formularz konfiguracyjny poświadczeń dostępu dla naszego urządzenia do serwera Thingsboard poprzez protokół MQTT. Pole te można wypełnić według uznania, ALE CO WAŻNE **poświadczenia te muszą się zgadzać z poświadczeniami które zostały lub będą wpisane w odpowiednie zmienne w wgrywanym szkicu Arduino**. W celu zapisania poświadczeń należy kliknąć przycisk „Zapisz”. Poniższe zrzuty ekranu prezentują wyżej wspomniane czynności. 
-
-![Zrzut ekranu prezentujący okno urzadzenia](/media/okno_urzadzenia.png)
+<a name="poswiadczenia_panel"></a>
+Teraz w kreatorze dodawania urządzenia wyświetli się kolejna zakładka, w której należy wybrać protokół „MQTT Basic”. W wyniku tego działania pokaże się formularz konfiguracyjny poświadczeń dostępu dla urządzenia do serwera ThingsBoard poprzez protokół MQTT. Pole te można wypełnić według uznania, ALE CO WAŻNE **poświadczenia te muszą się zgadzać z poświadczeniami które zostały lub będą wpisane w odpowiednie zmienne w wgrywanym szkicu Arduino**. [Były one pokazane w tym kroku.](#poswiadczenia_kod) W celu zapisania poświadczeń i dodania nowego urządzenia należy kliknąć przycisk „Dodaj”. Poniższe zrzuty ekranu prezentują wyżej wspomniane czynności.
 
 ![Zrzut ekranu prezentujący okno poświadczeń](/media/poswiadczenia.png)
 
 ![Zrzut ekranu prezentujący przykładowe poświadczenia](/media/przyklad_poswiadczen.png)
+
+Nowo dodane urządzenie powinno pojawić się na liście urządzeń co pokazuje poniższy zrzut ekranu.
+
+![Zrzut ekranu prezentujący pojawienie się urządzenie na liście](/media/lista_urzadzen.png)
 
 ---
 <a name="config-tb-panel"></a>
