@@ -1,1 +1,1 @@
-folder na kod mikrokontrolera
+# Folder na kod do mikrokontrolera
