@@ -30,14 +30,23 @@ W projekcie stacji pogodowej wykorzystaliśmy podane niżej piny:
 * GPIO6 i GPIO7 jako linie sygnałowe wyświetlacza OLED
   
 ![piny](/media/piny.jpg)
+
 ### Wyświetlacz OLED niebieski graficzny 0,96'' 128x64px I2C
+
 ![OLED](/media/OLED.jpg)
+
 ### Gravity: Analog Carbon Monoxide Sensor (MQ7) - moduł z czujnikiem tlenku węgla
+
 ![Czujnik tlenku węgla MQ7](/media/czujnik_tlenku_wegla.jpg)
+
 ### Czujnik temperatury DS18B20 TO92 1-Wire Dallas
+
 ![Czujnik temperatury DS18B20](/media/czujnik_temperatury.jpg)
+
 ### Moduł DHT22 Czujnik Temperatury i Wilgotności Black
+
 ![Czujnik wilgotnośc DHT22](/media/czujnik_wilgotnosci.jpg)
+
 ### Dodatkowe elementy
 Na potrzeby naszego układu należy dodatkowo przygotować:
 * płytkę/ki stykową/we
@@ -50,6 +59,7 @@ Na potrzeby naszego układu należy dodatkowo przygotować:
 <a name="Schemat połączeń"></a>
 ## Schemat połączeń
 ![SCHEMAT POŁĄCZEŃ](/media/schemat_polaczen.jpg)
+
 ---
 
 <a name="konstrukcja"></a>
@@ -70,6 +80,7 @@ Ostatnim krokiem jest połączenie przewodami wg schematu:
 Poniższe zdjęcie prezentuje przykadową ukonczoną konstrukcję układu.
 
 ![GRAFIKA Z KOŃCOWYM PROJEKTEM](/media/projekt.jpg)
+
 ---
 
 <a name="Instalacja środowiska Arduino IDE]"></a>
@@ -109,24 +120,37 @@ Jak nazwa wsazuje jest do biblioteka czujnika DHT. Program poinformuje nas, że 
 
 ### mqunifiedsensor
 Bibliotek do obsługi czujnika MQ7.
+
 ![Zrzut ekranu prezentujący instalację biblioteki do MQ7](/media/biblioteka_mq.png)
+
 ### dallastemperature
 Bibliotek do obsługi czujnika temperatury DS18B20 TO92 1-Wire Dallas.
+
 ![Zrzut ekranu prezentujący instalację biblioteki Dallas](/media/biblioteka_dallas.png)
+
 ### onewire
 Kolejna biblioteka służąca do obłśugi czujnika temperatury.
+
 ![Zrzut ekranu prezentujący instalację biblioteki Onewire](/media/biblioteka_onewire.png)
+
 ### adafruit ssd1306
 W tym przypadku podobnie jak z biblioteką „dht sensor library” pojawi się informacja, że wymagane są biblioteki „adafruit busio” i „adafruit gfx library”. Tak samo jak wcześniej klikamu przycisk „Zainstaluj wszystko”.
+
 ![Zrzut ekranu prezentujący instalację biblioteki Adafruit](/media/biblioteka_adafruit.png)
+
 ### wifimanager
 Biblioteka ta jest potrzeba do komunikacji przy użyciu wifi oraz do miniswerwera konfiguracyjnego wifi.
+
 ![Zrzut ekranu prezentujący instalację biblioteki wifimanager](/media/biblioteka_wifi.png)
+
 ### pubsubclient
 Biblioteka jest potrzebna dla klienta mqtt.
+
 ![Zrzut ekranu prezentujący instalację biblioteki pubsubclient](/media/biblioteka_pubsubclient.png)
+
 ### arduinojson
 Biblioteka ta jest potrzebna do łatwiejszego formatowania danych przesyłanych później na serwer.
+
 ![Zrzut ekranu prezentujący instalację biblioteki arduinojson](/media/biblioteka_arduinojson.png)
 
 ---
@@ -171,23 +195,29 @@ Przed rozpoczęciem wgrania szkicu należy jeszcze ustawić odpowiednią prędko
 ![Zrzut ekranu prezentujący przycisk monitora](/media/monitor_przycisk.png)
 
 Kliknęcie tego przycisku spowoduje otwarcie dodatkowej zakładki w której będą pojawiać się udostępnione dane diagnostyczne. Teraz należy zmienić wartość prędkości nasłuchiwania danych. Domyślnie jest ona ustawiona na „9600 baud”. Należy zmienić tę wartość na zgodną z zaproponowanym przez nas szkicem projektu czyli na wartość „115200 baud”. Zmianę tę prezentują poniższe zrzuty ekranu.
+
 ![Zrzut ekranu prezentujący ekran monitora i domyślną prędkość](/media/monitor_domyslna.png)
+
 ![Zrzut ekranu prezentujący przycisk monitora](/media/monitor_zmiana.png)
+
 Aby przetestować działanie monitora należy przykładowo kliknąć przycisk „reset” znajdujący się na płytce ESP32 w okolicach portu USB. Spowoduje to wyświetlenie logów wykonanych przez ESP32. Wynik powinien wyglądać podobnie do załączonego zrzutu ekranu poniżej.
+
 ![Zrzut ekranu prezentujący test monitora](/media/monitor_test_reset.png)
 
 ### Wgrywanie szkicu
-Gotowy szkic należy pobrać z tego githuba: stacjaMeteo_bmp180.ino lub stacjaMeteo_bmp280.ino.
+Należy teraz pobrać udostępniony przez nas [plik](src/firmware/esp32-wifi-sensors/esp32-wifi-sensors.ino).
 
 Aby otworzyć wybrany plik w Arduino IDE należy w pasku narzędzi wybrać opcję „Plik”, a następnie „Otwórz”. Teraz należy wybrać pobrany plik .ino z projektem. Wybranie opcji „Otwórz” prezentuje poniższy zrzut ekranu.
+
 ![Zrzut ekranu prezentujący wgrywanie pliku](/media/wgrywanie_pliku.png)
+
 W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy wybrać opcję „OK” co prezentuje poniższy zrzut ekranu.
 
 ![Zrzut ekranu prezentujący komunikat](/media/komunikat_ok.png)
 
 <a name="poswiadczenia_kod"></a>
-W tym momencie powinno uruchomić się nowe okno z załadowanym szkicem.
-W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie, które będą zgadzały się z [poświadczeniami skonfigurowanymi dla urządzenia na platformie ThingsBoard](#poswiadczenia_panel) w celu poprawnej komunikacji z serwerem MQTT.
+W tym momencie powinno uruchomić się nowe okno z załadowanym szkicem.<br>
+W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie, które będą zgadzały się z poświadczeniami skonfigurowanymi dla urządzenia na platformie ThingsBoard w celu poprawnej komunikacji z serwerem MQTT. Informacje te będą potrzebne w tym [kroku](#poswiadczenia_panel). Ważne aby zmienić zawartość zmiennej mqtt_server na adres posiadanego serwera! Jeżeli korzysta się z MQTT Basic port pozostaje ten sam.
 
 ![Zrzut ekranu prezentujący fragment kodu dotyczący dostosowania](/media/fragment_do_zmiany.png)
 
@@ -196,14 +226,19 @@ Aby upewnić się, że program po zmianie kodu dalej jest poprawny należy go zw
 ![Zrzut ekranu prezentujący przycisk do weryfikacji](/media/przycisk_weryfikuj.png)
 
 Sama weryfikacja może potrwać kilka minut. Proces ten prezentują poniższe zrzuty ekranu.
+
 ![Zrzut ekranu prezentujący przebieg weryfikacji](/media/weryfikacja.png)
+
 ![Zrzut ekranu prezentujący wynik weryfikacji](/media/wynik_weryfikacji.png)
+
 Jeżeli nie pojawiły się żadne błędy można przejść do wgrania szkicu do ESP32 poprzez kliknięcie przycisku strzałki „Prześlij” - znajduje się on obok poprzedniego. Prezentuje go poniższy zrzut ekranu.
 
 ![Zrzut ekranu prezentujący przycisk do przesyłania](/media/przycisk_przeslij.png)
 
 Samo przesyłanie również może potrwać kilka minut. Proces ten prezentują poniższe zrzuty ekranu.
+
 ![Zrzut ekranu prezentujący przebieg weryfikacji](/media/przesylanie.png)
+
 ![Zrzut ekranu prezentujący wynik weryfikacji](/media/wynik_przesylania.png)
 
 Wgranie szkicu spowoduje srestartowanie ESP32.
@@ -226,7 +261,7 @@ Po połączeniu do tej sieci zostanie otwarta strona internetowa z której nale�
 ## Środowisko archiwizacji i wizualizacji danych MQTT – ThingsBoard
 ThingsBoard to otwartoźródłowa (open-source) platforma IoT (Internet Rzeczy), która służy do łączenia, zarządzania, wizualizacji danych i przetwarzania informacji pochodzących z urządzeń IoT, oferując skalowalną i elastyczną infrastrukturę, dostępną w wersji darmowej (Community Edition) i płatnej (Professional Edition) dla rozwiązań w chmurze lub on-premise, obsługując protokoły takie jak MQTT, CoAP, HTTP. 
 Kluczowe funkcje i cechy:
-* Zarządzanie urządzenjami: Łączenie, monitorowanie i zdalne sterowanie urządzeniami.
+* Zarządzanie urządzeniami: Łączenie, monitorowanie i zdalne sterowanie urządzeniami.
 * Gromadzenie i przetwarzanie danych: Zbiera dane, które następnie można przetwarzać za pomocą wbudowanego silnika reguł (rule engine).
 * Wizualizacja: Tworzenie pulpitów (dashboards) i wizualizacji danych w czasie rzeczywistym.
 * Skalowalność i niezawodność: Zaprojektowana do obsługi dużej liczby urządzeń, z możliwością skalowania poziomego i odpornością na awarie (fault-tolerant).
@@ -249,7 +284,7 @@ https://thingsboard.io/pricing/
 2. [Konfiguracja panelu](#config-tb-panel)
 <a name="config-tb-dev"></a>
 ### Konfiguracja urządzenia
-Aby skonfigurować urządzenie należy wejść na adresu swojego panelu Thingsboard i zalogować się na swoje konto. Po zalogowaniu należy z bocznego paska nawigacyjnego wybrać zakładkę „Obiekty”, a po jej rozwinięciu „Urządzenia”. W panelu tym należy kliknąć znak „+”, a następnie „Dodaj nowe urządzenie”. Poniższe zrzuty ekranu prezentują znalezienie wspomnianej zakładki oraz lokalizację znaku „+”.
+Aby skonfigurować urządzenie należy wejść na adresu swojego panelu ThingsBoard i zalogować się na swoje konto. Po zalogowaniu należy z bocznego paska nawigacyjnego wybrać zakładkę „Obiekty”, a po jej rozwinięciu „Urządzenia”. W panelu tym należy kliknąć znak „+”, a następnie „Dodaj nowe urządzenie”. Poniższe zrzuty ekranu prezentują znalezienie wspomnianej zakładki oraz lokalizację znaku „+”.
 
 ![Zrzut ekranu widok panelu](/media/panel.png)
 
@@ -260,7 +295,7 @@ W otwartym oknie należy wpisać nazwę swojego urządzenia. W tym przypadku jes
 ![Zrzut ekranu prezentujący okno dodawania urządzenia](/media/dodawanie_urzadzenia.png)
 
 <a name="poswiadczenia_panel"></a>
-Teraz w kreatorze dodawania urządzenia wyświetli się kolejna zakładka, w której należy wybrać protokół „MQTT Basic”. W wyniku tego działania pokaże się formularz konfiguracyjny poświadczeń dostępu dla urządzenia do serwera ThingsBoard poprzez protokół MQTT. Pole te można wypełnić według uznania, ALE CO WAŻNE **poświadczenia te muszą się zgadzać z poświadczeniami które zostały lub będą wpisane w odpowiednie zmienne w wgrywanym szkicu Arduino**. [Były one pokazane w tym kroku.](#poswiadczenia_kod) W celu zapisania poświadczeń i dodania nowego urządzenia należy kliknąć przycisk „Dodaj”. Poniższe zrzuty ekranu prezentują wyżej wspomniane czynności.
+Teraz w kreatorze dodawania urządzenia wyświetli się kolejna zakładka, w której należy wybrać protokół „MQTT Basic”. W wyniku tego działania pokaże się formularz konfiguracyjny poświadczeń dostępu dla urządzenia do serwera ThingsBoard poprzez protokół MQTT. Pole te można wypełnić według uznania, ALE CO WAŻNE **poświadczenia te muszą się zgadzać z poświadczeniami które zostały lub będą wpisane w odpowiednie zmienne w wgrywanym szkicu Arduino**. Były one pokazane w tym [kroku](#poswiadczenia_kod). W celu zapisania poświadczeń i dodania nowego urządzenia należy kliknąć przycisk „Dodaj”. Poniższe zrzuty ekranu prezentują wyżej wspomniane czynności.
 
 ![Zrzut ekranu prezentujący okno poświadczeń](/media/poswiadczenia.png)
 
