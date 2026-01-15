@@ -63,9 +63,11 @@ Następnym krokiem jest doprowadzenie do wszystkich do wszystkich czujników i w
 Ostatnim krokiem jest połączenie przewodami wg schematu:
 * pin GPIO6 do pinu SDA wyświetlacza, GPIO7 do pinu SCL wyświetlacza, 
 * pin GPIO4 do jednej strony rezystora 4,7 kOhm podłączonego do linii sygnałowej czujnika temperatury,
-- pin GPIO11 do pinu OUT czujnika wilgotności
+* pin GPIO11 do pinu OUT czujnika wilgotności
 * pin GPIO08 do jednej strony rezystora 10 kOhm
 * dodatkowo od strony rezystora 20 kOhm, która jest niepodłączona do masy, należy doprowadzić przewód do kolorowego (najczęściej niebieskiego) przewodu czujnika tlenku węgla odpowiadającego za linię sygnałową.
+
+Poniższe zdjęcie prezentuje przykadową ukonczoną konstrukcję układu.
 
 ![GRAFIKA Z KOŃCOWYM PROJEKTEM](/media/projekt.jpg)
 ---
@@ -257,7 +259,7 @@ Kolejnym krokiem jest utworzenie panelu. Panel ten umożliwi wyświetlanie infor
 
 ![Zrzut ekranu prezentujący zakładkę Panele](/media/panele.png)
 
-Należy teraz pobrać udostępniony przez nas pliku panelu dla stacji pogodowej ![LINK TO DO](/src/backend/README.md), a następnie przeciągnąć go lub wybrać go z okna importu panelu. Po jego pojawieniu się należy kliknąć przycisk „Importuj”. Poniżej znajduje się zrzut ekranu pokazujący to okno.
+Należy teraz pobrać udostępniony przez nas [plik](src/dashboard/panel_stacji_pogodowej_esp32.json) panelu dla stacji pogodowej, a następnie przeciągnąć go lub wybrać go z okna importu panelu. Po jego pojawieniu się należy kliknąć przycisk „Importuj”. Poniżej znajduje się zrzut ekranu pokazujący to okno.
 
 ![Zrzut ekranu prezentujący okno importu panelu](/media/import_panelu.png)
 
