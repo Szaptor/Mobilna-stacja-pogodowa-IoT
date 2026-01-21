@@ -114,7 +114,7 @@
           "padding": "0px",
           "settings": {
             "useMarkdownTextFunction": false,
-            "markdownTextPattern": "##### ${entityName}\n\n| **Typ pomiaru**   | **Aktualny pomiar** |\n|:-:|:-:|\n| **Temperatura pow.** | ${temperature} C   |\n| **Wilgotnosc pow.**        | ${humidity} %   |\n| **Stężenie CO**       | ${coPpm} ppm   |\n\n###### Informacje o stacji\n\n**Nazwa urządzenia** - ${entityName} <br>\n**Autorzy projektu** - ${entityLabel}   \n**Ostatnia aktywność** - {{ ${lastActivityTime} | date:'d-M-Y H:s' }}  ",
+            "markdownTextPattern": "##### ${entityName}\n\n| **Typ pomiaru**   | **Aktualny pomiar** |\n|:-:|:-:|\n| **Temperatura pow.** | ${temperature} C   |\n| **Wilgotnosc pow.**        | ${humidity} %   |\n| **Stężenie CO**       | ${coPpm} ppm   |\n\n###### Informacje o stacji\n\n**Nazwa urządzenia** - ${entityName} <br>\n**Autorzy projektu** - ${entityLabel}   \n**Ostatnia aktywność** - {{ ${lastActivityTime} | date:'d-M-Y H:m:s' }}  ",
             "markdownTextFunction": "return '# Some title\\\\n - Entity name: ' + data[0]['entityName'];",
             "applyDefaultMarkdownStyle": true,
             "markdownCss": ""
