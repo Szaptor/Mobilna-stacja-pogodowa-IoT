@@ -1,7 +1,7 @@
 # Mobilna stacja pogodowa - projekt IoT
-Niniejsze repozytorium jest poświęcone projektowi IoT mobilnej stacji pogodowej. Projekt składa się z czujników podłączonego do mikrokontrolera, który komunikuje się protokołem MQTT z panel na otwartoźródłowej platformie IoT ThingsBoard.
+Niniejsze repozytorium jest poświęcone projektowi IoT mobilnej stacji pogodowej. Projekt składa się z czujników podłączonych do mikrokontrolera, który komunikuje się protokołem MQTT z panelem na otwartoźródłowej platformie IoT ThingsBoard.
 
-Do rozpoczęcia pracy z projektem poza później wyszczególnionymi materiałami wymagane jest posiadanie dostępu do platformy ThingsBoard, dane służące połączeniu się z nią przez MQTTT basic; urządzenie z dostępem do WiFi, w celu późniejszego połączenia się z Access Pointem mikrokontrolera oraz komputer z Arduino IDE.
+Do rozpoczęcia pracy z projektem, poza później wyszczególnionymi materiałami, wymagane jest posiadanie dostępu do platformy ThingsBoard, dane służące połączeniu się z nią przez MQTTT basic; urządzenie z dostępem do WiFi, w celu późniejszego połączenia się z Access Pointem mikrokontrolera oraz komputer z Arduino IDE.
 
 ## Przykład poprawnie złożonej i działającej stacji pogodowej
 
