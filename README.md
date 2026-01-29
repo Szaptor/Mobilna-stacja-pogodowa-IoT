@@ -240,7 +240,7 @@ W przypadku pojawienia się komunikatu o umieszczenie szkicu w folderze należy 
 W tym momencie powinno uruchomić się nowe okno z załadowanym szkicem.<br>
 W celu poprawnego działania należy ustawić wartości pokazanego poniżej fragmentu w kodzie na odpowiednie, które będą zgadzały się z poświadczeniami skonfigurowanymi dla urządzenia na platformie ThingsBoard w celu poprawnej komunikacji z serwerem MQTT. Informacje te będą potrzebne w tym [kroku](#poswiadczenia_panel). Ważne aby zmienić zawartość zmiennej mqtt_server na adres posiadanego serwera! Jeżeli korzysta się z MQTT Basic port pozostaje ten sam.
 
-TU WKLEJ
+![Zrzut ekranu prezentujący fragment kodu dotyczący dostosowania](/media/fragment_do_zmiany.png)
 
 Aby upewnić się, że program po zmianie kodu dalej jest poprawny należy go zweryfikować poprzez klinknięcie przycisku ptaszka/haczyka „Weryfikuj”, który pokazuje poniższy zrzut ekranu. Spowoduje to wstępną kompliację kodu projektu.
 
@@ -275,7 +275,7 @@ Po połączeniu do tej sieci zostanie otwarta strona internetowa z której nale�
 
 ![Zrzut ekranu prezentujący stronę](/media/strona.png)
 
-TU WKLEJ
+![Zrzut ekranu prezentujący konfigurację sieci do której ESP32 ma się połączyć](/media/konfiguracja_sieci.png)
 
 ---
 <a name="tb"></a>
