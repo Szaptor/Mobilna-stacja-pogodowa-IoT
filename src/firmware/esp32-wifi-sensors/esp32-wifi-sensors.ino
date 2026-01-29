@@ -68,7 +68,7 @@ const char* mqtt_topic = "v1/devices/me/telemetry"; // stays constant - topic na
 String cid = "SIMA7670E"; //Client ID for MQTT
 
 // Default MQTT values (editable via WiFiManager)
-char mqtt_server[100] = "iot.marekurbaniak.pl"; // or IP address
+char mqtt_server[100] = "iot.server.pl"; // or IP address
 char mqtt_port[10]   = "1883"; // TCP port (not TLS)
 char mqtt_user[100]  = "WeatherStation";
 char mqtt_pass[100]  = "iot2025projekt";
